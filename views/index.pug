@@ -8,8 +8,5 @@ html
     h2 #{globalWow}
 
   block content
-    button#showLogin login
-    button#showRegister register
-
-    script
-      include ../client/client.js
+    a#showLogin(href='/login')= 'login'
+    a#showRegister(href='/register')= 'register'
