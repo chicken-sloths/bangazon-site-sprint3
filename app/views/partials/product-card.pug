@@ -1,4 +1,5 @@
 .product
-  h1= product.title
+  h1
+    a(href='/products/'+product.id)= product.title
   h4= product.current_price
   p= product.description
