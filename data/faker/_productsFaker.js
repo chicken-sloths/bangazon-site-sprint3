@@ -7,7 +7,7 @@ const _generateProducts = ({ productAmount, customerAmount, productTypesAmount }
 
   for (let i = 0; i < productAmount; i++) {
     const product = {
-      product_id: i,
+      id: i,
       current_price: faker.commerce.price(),
       title: faker.commerce.productName(),
       creation_date: faker.date.recent(),

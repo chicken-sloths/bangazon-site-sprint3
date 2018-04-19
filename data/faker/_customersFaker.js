@@ -6,7 +6,7 @@ const _generateCustomers = ({ customerAmount }) => {
 
   for (let i = 0; i < customerAmount; i++) {
     const customer = {
-      customer_id: i,
+      id: i,
       first_name: faker.name.firstName(),
       last_name: faker.name.lastName(),
       account_creation_date: faker.date.recent(),

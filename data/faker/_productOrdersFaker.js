@@ -21,7 +21,7 @@ const _generateProductOrders = ({ customerAmount, maxProductsOnOrder, productAmo
       for (let j = 0; j < randomAmountOfProducts; j++) {
         const randProdId = randomInt(productAmount);
         const productOrder = {
-          product_order_id: curProductOrderId,
+          id: curProductOrderId,
           product_id: randProdId,
           order_id: customerOrder.order_id,
           price: products[randProdId].current_price
