@@ -30,7 +30,7 @@ app.use(session({
 })); // session secret
 
 //execute passport strategies file
-require('./config/passport-strat.js');
+require('./models/config/passport-strat.js');
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 // This custom middleware adds the logged-in user's info to the 'locals' variable,
