@@ -20,6 +20,9 @@ const createDb = qi => {
     .then(qi => {
       return models.ProductType.bulkCreate(productTypes);
     })
+    .then(qi => {
+      return models.PaymentOption.bulkCreate(paymentOptions);
+    })
     .then(response => {
       process.exit();
     })
