@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     Customer.hasMany(models.Product, {
       foreignKey: 'creator_id'
     });
+    Customer.hasMany(models.PaymentOption, {
+      foreignKey: 'customer_id'
+    });
   };
   return Customer;
 };
