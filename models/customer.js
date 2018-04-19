@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     phone_number: DataTypes.STRING
   }, {});
   Customer.associate = function(models) {
-    // associations can be defined here
+    Customer.hasMany(models.Product, {
+      foreignKey: 'creator_id'
+    });
   };
   return Customer;
 };
