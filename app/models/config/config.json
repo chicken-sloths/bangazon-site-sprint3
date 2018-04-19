@@ -1,5 +1,6 @@
 {
   "development": {
+<<<<<<< HEAD
     "username": "root",
     "password": null,
     "database": "YOUR DB NAME",
@@ -21,3 +22,12 @@
     "dialect": "mysql"
   }
 }
+=======
+    "username": "kenzie",
+    "password": "kenzie",
+    "database": "sprint3",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
+>>>>>>> master

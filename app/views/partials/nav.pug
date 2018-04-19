@@ -2,13 +2,3 @@ if session.passport
   span #{session.passport.user.username}
   form(method="POST")
     button(type="submit" formaction="/logout") logout
-    
-//- Navbar options, in no particular order, some only show on auth, precise name
-//- to be decided (or only use an icon):
-
-//- Search (input)
-//- Login/logout
-//- Settings
-//- Categories (a dropdown?)
-//- Cart
-//- Sell product
