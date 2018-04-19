@@ -22,7 +22,7 @@ const _generateProductOrders = ({ customerAmount, maxProductsOnOrder, productAmo
         const productOrder = {
           product_id: randProdId,
           order_id: orders.indexOf(randOrder)+1,
-          price: products[randProdId].current_price
+          price: products[randProdId-1].current_price
         };
 
         productOrders.push(productOrder);
