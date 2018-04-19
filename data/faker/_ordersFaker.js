@@ -11,11 +11,11 @@ const _generateOrders = ({ orderAmount }, customers, paymentOptions) => {
   for (let i = 0; i < orderAmount; i++) {
     let randCustId = randomInt(customers.length);
     let payOp = paymentOptions.find(po => po.customer_id == randCustId);
-    let payOpId = paymentOptions.indexOf(payOp);
+    let payOpId = paymentOptions.indexOf(payOp)+1;
 
     let order = {
       customer_id: randCustId,
-      payment_option_id: payOpId >= 0 ? payOpId : null,
+      payment_option_id: payOpId > 0 ? payOpId : null,
       creation_date: faker.date.recent()
     };
 
