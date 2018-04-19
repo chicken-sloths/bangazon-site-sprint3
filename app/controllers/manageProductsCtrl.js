@@ -14,18 +14,24 @@ module.exports.addNewProductForSale = (req, res, next) => {
   // check if a user is logged in
   // if not, log that sucker in
   // if so, proceed with the following:
-  // POST single director
-  app.post('/directors', ({ body: { name, birth_year, twitter_handle } }, res, next) => {
-    Director.create({
-      name, birth_year, twitter_handle
+    const { Product } = req.app.get('models');
+    const d = new Date();
+    const formattedDate = d.toISOString();
+    console.log('formattedDate', formattedDate);
+    Product.create({
+      current_price: req.body.current_price, 
+      title: req.body.title, 
+      creation_date: formattedDate,
+      quantity: req.body.quantity,
+      deleted: false, 
+      description: req.body.description, 
+      product_type_id: req.body.product_type_id,
+      creator_id: 1 // CHANGE THIS TO CURRENT USER ID ONCE I FIGURE OUT HOW TO GET IT
     })
-      .then(newRecord => {
-        res.status(201).json(newRecord);
-      })
-      .catch(err => {
-        next(err);
-      })
-  });
-
-
+    .then(newRecord => {
+      res.status(201).json(newRecord);
+    })
+    .catch(err => {
+      next(err);
+    })
 };
