@@ -24,7 +24,7 @@ const _generateProductOrders = ({ customerAmount, maxProductsOnOrder, productAmo
           product_order_id: curProductOrderId,
           product_id: randProdId,
           order_id: customerOrder.order_id,
-          product_price: products[randProdId].current_price
+          price: products[randProdId].current_price
         };
 
         // Increment the current product order id for the next product

@@ -11,6 +11,7 @@ const _generatePaymentOptions = ({customerAmount}) => {
     const paymentOption = {
       payment_option_id: i,
       type: paymentTypes[randomInt(paymentTypes.length)],
+      deleted: faker.random.boolean(),
       account_number: faker.finance.account(),
       customer_id: randomInt(customerAmount)
     };
