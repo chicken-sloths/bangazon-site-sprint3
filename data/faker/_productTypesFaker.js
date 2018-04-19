@@ -6,7 +6,6 @@ const _generateProductTypes = ({ productTypesAmount }) => {
 
   for (let i = 0; i < productTypesAmount; i++) {
     const type = {
-      id: i,
       title: faker.commerce.department()
     };
 

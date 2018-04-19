@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "data:gen": "node data/build-data.js"
+    "data:gen": "node data/build-data.js",
+    "db:gen": "node data/createDb.js"
   },
   "keywords": [],
   "author": "",
