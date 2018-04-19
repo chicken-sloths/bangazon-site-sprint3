@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = length => Math.floor(Math.random() * length);
+module.exports = length => Math.floor(Math.random() * length)+1;

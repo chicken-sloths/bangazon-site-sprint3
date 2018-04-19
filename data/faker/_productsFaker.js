@@ -13,8 +13,8 @@ const _generateProducts = ({ productAmount, customerAmount, productTypesAmount }
       quantity: randomInt(50),
       deleted: faker.random.boolean(),
       description: faker.commerce.productAdjective(),
-      product_type_id: randomInt(productTypesAmount)+1,
-      creator_id: randomInt(customerAmount)+1
+      product_type_id: randomInt(productTypesAmount),
+      creator_id: randomInt(customerAmount)
     };
 
     products.push(product);
