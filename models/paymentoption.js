@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     PaymentOption.belongsTo(models.Customer, {
       foreignKey: 'customer_id'
     });
+    PaymentOption.hasMany(models.Order, {
+      foreignKey: 'payment_option_id'
+    });
   };
   return PaymentOption;
 };
