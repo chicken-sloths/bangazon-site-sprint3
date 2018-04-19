@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "data:gen": "node data/build-data.js"
+    "data:gen": "node data/build-data.js",
+    "db:gen": "node data/createDb.js"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,6 @@
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
     "pug": "^2.0.0-rc.4",
-    "sequelize": "^4.13.5"
+    "sequelize": "^4.37.6"
   }
 }
