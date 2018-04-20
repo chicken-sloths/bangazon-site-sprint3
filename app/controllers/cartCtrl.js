@@ -5,25 +5,28 @@ module.exports.displayCart = (req, res, next) => {
   req.isAuthenticated();
   Order.find({
     where: {
-      paymentType: null,
+      payment_option_id: null,
       customer_id: req.user.id
     }
   })
     .then(activeOrder => {
-      console.log(activeOrder);
       return ProductOrder.findAll({
         where: {
           order_id: activeOrder.id
         },
-        include: [
-          {
-            model: Product
-          }
-        ]
+        include: [{ model: Product }],
+        raw: true
       })
     })
-    .then(products => {
-      res.render('cart', { products });
+    .then(productOrders => {
+      let products = productOrders.map(po => {
+        return {
+          id: po['Product.id'],
+          title: po['Product.title'],
+          description: po['Product.description']
+        };
+      });
+      res.render('cart.pug', { products });
     });
 };
 
