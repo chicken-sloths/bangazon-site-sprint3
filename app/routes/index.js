@@ -5,11 +5,6 @@ const router = Router();
 const { getProductsByType } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
 
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated())
-    return next();
-  res.redirect('/login');
-}
 
 router.get('/', (req, res, next) => {
   res.render('index');
