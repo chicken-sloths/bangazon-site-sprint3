@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   var ProductType = sequelize.define('ProductType', {
     title: DataTypes.STRING
