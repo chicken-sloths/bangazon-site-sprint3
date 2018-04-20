@@ -11,6 +11,15 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
+router.use((req, res, next) => {
+  const { ProductType } = req.app.get('models');
+  ProductType.findAll()
+    .then(prodTypes => {
+      res.locals.categories = prodTypes; 
+      next();
+    });
+});
+
 router.get('/categories/:id', getProductsByType);
 router.post('/search', searchProductsByName);
 
