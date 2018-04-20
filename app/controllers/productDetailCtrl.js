@@ -9,7 +9,10 @@ module.exports.displayProductDetail = (req, res, next) => {
     ]
   })
   .then(({dataValues}) => {
-    dataValues.quantity -= dataValues.ProductOrders.length
+    // Subtracts quantity - ProductOrders.length, equals 0 if that'd equal a
+    // negative integer
+    dataValues.quantity -= dataValues.quantity > dataValues.ProductOrders.length
+      ? dataValues.ProductOrders.length : dataValues.quantity;
     dataValues.query = req.query;
     res.render('product-details', dataValues);
   })
@@ -24,14 +27,18 @@ module.exports.addToCart = (req, res, next) => {
     // Currently redirects to login, but we might talk about a better solution
     return res.redirect('/login');
   }
-  Order.find({
+  Order.findOrCreate({
     where: {
+      customer_id: req.user.id,
+      payment_option_id: null
+    },
+    default: {
       customer_id: req.user.id,
       payment_option_id: null
     }
   })
-  .then(({dataValues: {id}}) => {
-    const order_id = id;
+  .then(([ resp ]) => {
+    const order_id = resp.dataValues.id;
 
     Product.findById(product_id)
     .then(({dataValues: {current_price}}) => {
@@ -46,7 +53,7 @@ module.exports.addToCart = (req, res, next) => {
     .then(resp => {
       // Renders the page again b/c quantity needs to change
       // ?added=true is accessible at req.query, used in pug template for
-      // success message
+      // success message. Not an optimal solution, but something for now
       res.redirect(`/product/${product_id}?added=true`);
     });
   });
