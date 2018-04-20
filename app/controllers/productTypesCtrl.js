@@ -4,7 +4,9 @@
 // ctrls. In developing these, if it becomes clear to break them out, by all
 // means, go ahead!
 
-const { ProductType, Product } = require('../models');
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
+const { ProductType, Product, ProductOrder } = require('../models');
 
 module.exports.displayAllCategories = (req, res, next) => {
   // Gets all categories & three products for each category
@@ -12,11 +14,30 @@ module.exports.displayAllCategories = (req, res, next) => {
 };
 
 module.exports.getProductsByType = (req, res, next) => {
+  let products;
   ProductType.findOne({ where: { id: req.params.id } })
     .then(type => {
-      return Product.findAll({ where: { product_type_id: req.params.id } });
+      return Product.findAll({
+        where: {
+          product_type_id: req.params.id,
+          quantity: {
+            [Op.gt]: 0
+          },
+          deleted: false
+        }
+      });
     })
-    .then(products => {
-      res.render('product-type.pug', { products })
+    .then(prods => {
+      products = prods;
+      let qtyPromises = products.map(p => {
+        return p.getQuantityRemaining();
+      });
+      return Promise.all(qtyPromises);
+    })
+    .then(qtys => {
+      products.forEach((p,index) => {
+        p.quantity_left = qtys[index];
+      });
+      res.render('product-type.pug', { products });
     });
 };
