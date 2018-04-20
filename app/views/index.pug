@@ -1,14 +1,5 @@
-doctype html
-html
-  head
-    title Bangazon!
-  body
-    include partials/nav.pug
-    h1 Bangazon!
-    h2 #{globalWow}
+extends layout
 
-  block content
-    a#showLogin(href='/login')= 'login'
-    a#showRegister(href='/register')= 'register'
-
-  script(src="../client/front-end.js")
+block content
+  h1= 'Bangazon Home'
+  ='all product categories here'

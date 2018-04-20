@@ -1,4 +1,7 @@
 extends layout
 
 block content
-  //- Displays search results, using product-card
+  h1= 'Search for \''+term+'\':'
+  h3= products.length+' results found'
+  for product in products
+    include partials/product-card
