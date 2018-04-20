@@ -8,9 +8,12 @@ module.exports.searchProductsByName = (req, res, next) => {
   let products;
   Product.findAll({
     where: {
-      title: { [Op.iLike]: '%' + req.body.term + '%' }
-    },
-    limit: 10
+      title: { [Op.iLike]: '%' + req.body.term + '%' },
+      quantity: {
+        [Op.gt]: 0
+      },
+      deleted: false
+    }
   })
     .then(prods => {
       products = prods;
