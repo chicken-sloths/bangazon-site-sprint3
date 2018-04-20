@@ -1,7 +1,7 @@
 extends layout
 block content
   h1 Add a New Product
-  form(action="/products/new" method="POST")
+  form(action="/products/manage/new" method="POST")
     input(type="text" name="title" placeholder="Product Name")
     input(type="text" name="current_price" placeholder="Price")
     input(type="text" name="quantity" placeholder="How many are there available to sell?")
