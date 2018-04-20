@@ -12,8 +12,9 @@ module.exports.removeProductFromSale = (req, res, next) => {
 // Gets product types and passes them into the Add Product Form
 module.exports.renderAddProductForm = (req, res, next) => {
   const { ProductType } = req.app.get('models');
-  ProductType.findAll()
+  ProductType.findAll({raw: true})
   .then(productTypes => {
+    console.log('product types', productTypes);
     res.render('new-product', { productTypes });
   })
   .catch(err => {
