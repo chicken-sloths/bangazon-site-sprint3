@@ -16,4 +16,7 @@ router.post('/search', searchProductsByName);
 router.use(require('./authRoute'));
 // router.use(require('./foo'));
 
+// require in all the products routes
+router.use('/products', require('./productsRouter'));
+
 module.exports = router;
