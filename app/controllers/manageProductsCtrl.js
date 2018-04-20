@@ -19,9 +19,8 @@ module.exports.displayUsersProducts = (req, res, next) => {
       return Promise.all(qtyPromises)
       .then(qtys => {
         products.forEach((p, index) => {
-          p.quantity = qtys[index];
+          p.quantity_left = qtys[index];
         });
-        console.log("Products with quantities?", products);
         res.render('manage-products.pug', { products });
       })
     })
