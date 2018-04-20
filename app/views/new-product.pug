@@ -1,10 +1,10 @@
 extends layout
-  block content
+block content
   h1 Add a New Payment Option
-  form(action="/products" method="POST")
+  form(action="/products/new" method="POST")
     input(type="text" name="title" placeholder="Product Name")
     input(type="text" name="current_price" placeholder="Price")
     input(type="text" name="quantity" placeholder="How many are there available to sell?")
     input(type="text" name="description" placeholder="Description")
-    button(type="submit")
+    button(type="submit" text="Submit")
 

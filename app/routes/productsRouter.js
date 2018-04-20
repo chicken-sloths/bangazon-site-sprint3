@@ -3,10 +3,12 @@
 const { Router } = require('express');
 const productsRouter = Router();
 
-const { addNewProductForSale } = require('../controllers/manageProductsCtrl');
+const { addNewProductForSale, renderAddProductForm } = require('../controllers/manageProductsCtrl');
 
-// handles posts to the /products route (i.e. adding a new product)
-productsRouter.post('/add', addNewProductForSale);
+// render the form to add a new product
+productsRouter.get('/new', renderAddProductForm);
 
+// when the user clicks 'submit' on the form to add a new product
+productsRouter.post('/new', addNewProductForSale);
 
 module.exports = productsRouter;
