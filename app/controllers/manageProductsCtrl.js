@@ -2,6 +2,19 @@
 
 module.exports.displayUsersProducts = (req, res, next) => {
   //Renders manage-products.pug
+  const { Product } = req.app.get('models');
+  Product.findAll({
+    where: {
+      creator_id: req.params.id,
+      deleted: false
+    }
+  })
+    .then( products => {
+      res.status(200).json(products);
+    })
+    .catch( err => {
+      next(err);
+    })
 };
 
 module.exports.removeProductFromSale = (req, res, next) => {

@@ -2,9 +2,9 @@
 
 const { Router } = require('express');
 const prodRouter = Router();
-const { getUserProds } = require('../controllers/manageProdsC');
+const { displayUsersProducts } = require('../controllers/manageProductsCtrl');
 
 
-prodRouter.get(('/products/:id'), getUserProds);
+prodRouter.get(('/products/:id'), displayUsersProducts);
 
 module.exports = prodRouter;
