@@ -4,3 +4,5 @@ if product.quantity_left > 0 || state === "manage"
       a(href='/products/'+product.id)= product.title
     h4= product.current_price + ' ('+product.quantity_left+' left)'
     p= product.description
+    if state === "manage"
+      button.deleteProd delete
