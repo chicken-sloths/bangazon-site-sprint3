@@ -5,8 +5,8 @@ const productsRouter = Router();
 
 const { addNewProductForSale } = require('../controllers/manageProductsCtrl');
 
-// handles posts to the /products route
-productsRouter.post('/', addNewProductForSale);
+// handles posts to the /products route (i.e. adding a new product)
+productsRouter.post('/add', addNewProductForSale);
 
 
 module.exports = productsRouter;

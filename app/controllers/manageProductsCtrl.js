@@ -17,7 +17,6 @@ module.exports.addNewProductForSale = (req, res, next) => {
     const { Product } = req.app.get('models');
     const d = new Date();
     const formattedDate = d.toISOString();
-    console.log('formattedDate', formattedDate);
     Product.create({
       current_price: req.body.current_price, 
       title: req.body.title, 
