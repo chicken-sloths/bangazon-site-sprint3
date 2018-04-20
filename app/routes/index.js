@@ -7,10 +7,6 @@ const { searchProductsByName } = require('../controllers/searchCtrl');
 const { displayCart } = require('../controllers/cartCtrl');
 const checkAuth = require('./checkAuth');
 
-router.get('/', (req, res, next) => {
-  res.render('index');
-});
-
 router.use((req, res, next) => {
   const { ProductType } = req.app.get('models');
   ProductType.findAll()
@@ -20,6 +16,9 @@ router.use((req, res, next) => {
     });
 });
 
+router.get('/', (req, res, next) => {
+  res.render('index');
+});
 router.get('/categories/:id', getProductsByType);
 router.post('/search', searchProductsByName);
 
