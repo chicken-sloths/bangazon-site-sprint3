@@ -28,7 +28,7 @@ router.use('/products', require('./productsRouter'));
 
 // Default route
 router.use((req, res, next) => {
-  res.render('index');
+  res.redirect('/');
 });
 
 module.exports = router;
