@@ -6,24 +6,15 @@ const { getProductsByType } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
 const checkAuth = require('./checkAuth');
 
-
-const {
-  displayProductDetail,
-  addToCart
-} = require('../controllers/productDetailCtrl');
-
 router.get('/', (req, res, next) => {
   res.render('index');
 });
 
 router.get('/categories/:id', getProductsByType);
-router.get('/product/:id', displayProductDetail);
-router.post('/product/:id', addToCart);
 router.post('/search', searchProductsByName);
 
 // pipe all other requests through the route modules
 router.use(require('./authRoute'));
-router.use(checkAuth);
 
 // router.use(require('./foo'));
 
