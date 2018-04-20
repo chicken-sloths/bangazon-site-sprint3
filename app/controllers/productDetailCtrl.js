@@ -23,10 +23,6 @@ module.exports.addToCart = (req, res, next) => {
   const product_id = req.params.id;
   const { Product, ProductOrder, Order } = req.app.get('models');
 
-  if (!req.isAuthenticated()) {
-    // Currently redirects to login, but we might talk about a better solution
-    return res.redirect('/login');
-  }
   Order.findOrCreate({
     where: {
       customer_id: req.user.id,
@@ -54,7 +50,7 @@ module.exports.addToCart = (req, res, next) => {
       // Renders the page again b/c quantity needs to change
       // ?added=true is accessible at req.query, used in pug template for
       // success message. Not an optimal solution, but something for now
-      res.redirect(`/product/${product_id}?added=true`);
+      res.redirect(`/products/${product_id}?added=true`);
     });
   });
 };
