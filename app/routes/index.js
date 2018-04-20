@@ -17,6 +17,9 @@ router.get('/', (req, res, next) => {
 router.get('/categories/:id', getProductsByType);
 router.get('/product/:id', displayProductDetail);
 router.post('/product/:id', addToCart);
+router.get('/product', (req, res, next) => {
+  res.render('index');
+});
 router.post('/search', searchProductsByName);
 
 // pipe all other requests through the route modules
