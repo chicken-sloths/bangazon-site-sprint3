@@ -1,4 +1,26 @@
-if session.passport
-  span #{session.passport.user.username}
-  form(method="POST")
-    button(type="submit" formaction="/logout") logout
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  a.navbar-brand(href='/') Bangazon
+  ul.navbar-nav.mr-auto
+    li.nav-item.dropdown
+      a.nav-link.dropdown-toggle#catDrop(href='#', data-toggle='dropdown',aria-labelledby='#catDrop') Categories
+      .dropdown-menu
+        a.dropdown-item(href='/categories/3') 3 (replace later)
+    if session.passport
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle#settings(href='#', data-toggle='dropdown',aria-labelledby='#settings')= session.passport.user.email
+        .dropdown-menu
+          a.dropdown-item(href='/settings') my account
+          a.dropdown-item(href='/products/manage') manage products
+        li.nav-item
+          a.nav-link(href='/cart') view cart
+        li.nav-item
+          form(method="POST")
+            button.nav-link(type="submit" formaction="/logout") logout
+    if !session.passport
+      li.nav-item
+        a.nav-link(href='/login') login
+      li.nav-item
+        a.nav-link(href='/register') register
+    form.form-inline.my-2.my-lg-0
+      input.form-control.mr-sm-2(type="search", placeholder="Search products", aria-label='Search')
+      button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search

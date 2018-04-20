@@ -24,7 +24,7 @@ const RegistrationStrategy = new Strategy(
   // arg2 callback, handle storing a user's details.
   (req, email, password, done) => {
     console.log("local strat callback: password", email);
-    User = req.app.get("models").User; // this is made possible by line 14 in app.js: app.set('models', require('./models'));
+    User = req.app.get("models").Customer;
 
     // add our hashed password generating function inside the callback function
     const generateHash = password => {
@@ -78,7 +78,7 @@ const LoginStrategy = new Strategy(
     passReqToCallback: true // allows us to pass back the entire request to the callback
   },
   (req, email, password, done) => {
-    User = req.app.get("models").User;
+    User = req.app.get("models").Customer;
     const isValidPassword = (userpass, password) => {
       // hashes the passed-in password and then compares it to the hashed password fetched from the db
       return bCrypt.compareSync(password, userpass);
@@ -92,11 +92,6 @@ const LoginStrategy = new Strategy(
           return done(null, false, {
             message:
               "Can't find a user with those credentials. Please try again"
-          });
-        }
-        if (req.body.username != user.username) {
-          return done(null, false, {
-            message: "Wrong username. Please try again"
           });
         }
         if (!isValidPassword(user.password, password)) {

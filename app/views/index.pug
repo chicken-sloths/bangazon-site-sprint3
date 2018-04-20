@@ -1,13 +1,6 @@
-doctype html
-html
-  head
-    title Bangazon!
-  body
-    include partials/nav.pug
-    h1 Bangazon!
-    h2 #{globalWow}
-    h3= data
+extends layout
 
-  block content
-    a#showLogin(href='/login')= 'login'
-    a#showRegister(href='/register')= 'register'
+
+block content
+  h1= 'Bangazon Home'
+  include partials/allProductTypes
