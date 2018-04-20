@@ -14,16 +14,12 @@ module.exports.renderAddProductForm = (req, res, next) => {
   const { ProductType } = req.app.get('models');
   ProductType.findAll({raw: true})
   .then(productTypes => {
-    console.log('product types', productTypes);
     res.render('new-product', { productTypes });
   })
   .catch(err => {
-    console.log('Error!', err);
     next(err);
   })
 }
-
-
 
 //Posts new product for the authed user, redirecst to prod details view
 module.exports.addNewProductForSale = (req, res, next) => {
