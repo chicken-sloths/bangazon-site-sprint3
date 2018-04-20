@@ -11,9 +11,9 @@ module.exports.displayAllCategories = (req, res, next) => {
   // Renders index.pug
   const { sequelize } = req.app.get('models')
     sequelize.query(`select "ProductTypes".title as type, "Products".title from "ProductTypes" join "Products" ON "Products".product_type_id = "ProductTypes".id`, { type: sequelize.QueryTypes.SELECT})
-    .then(data => {
-      console.log('wheres the fucking data',data);
-      res.render('index', data);
+    .then(prodType => {
+      console.log('wheres the fucking data',prodType);
+      res.render('index', prodType);
       })
       .catch(err => {
         console.log("oops", err);
