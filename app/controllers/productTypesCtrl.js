@@ -41,3 +41,21 @@ module.exports.getProductsByType = (req, res, next) => {
       res.render('product-type.pug', { products });
     });
 };
+
+module.exports.displayAllCategories = (req, res, next) => {
+  // Gets all categories & three products for each category
+  // Renders index.pug
+  const { sequelize } = req.app.get('models')
+    sequelize.query(`select "ProductTypes".title as type, array_agg("Products".title) from "ProductTypes" join "Products" ON "Products".product_type_id = "ProductTypes".id group by "ProductTypes".title`, { type: sequelize.QueryTypes.SELECT})
+    .then(prodType => {
+      res.render('index', {prodType});
+      })
+      .catch(err => {
+        console.log("oops", err);
+      })
+};
+
+module.exports.displayCategory = (req, res, next) => {
+  // Gets products for a particular category
+  // Renders category.pug
+};

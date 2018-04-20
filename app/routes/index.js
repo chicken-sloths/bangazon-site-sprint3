@@ -2,7 +2,7 @@
 
 const { Router } = require('express');
 const router = Router();
-const { getProductsByType } = require('../controllers/productTypesCtrl');
+const { getProductsByType, displayAllCategories } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
 const { displayCart } = require('../controllers/cartCtrl');
 const checkAuth = require('./checkAuth');
@@ -16,9 +16,7 @@ router.use((req, res, next) => {
     });
 });
 
-router.get('/', (req, res, next) => {
-  res.render('index');
-});
+router.get('/', displayAllCategories);
 router.get('/categories/:id', getProductsByType);
 router.post('/search', searchProductsByName);
 
