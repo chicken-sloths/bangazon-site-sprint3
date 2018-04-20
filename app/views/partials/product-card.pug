@@ -1,6 +1,8 @@
-if product.quantity_left > 0
+if product.quantity_left == null || product.quantity_left > 0
   .product
     h1
       a(href='/products/'+product.id)= product.title
-    h4= product.current_price + ' ('+product.quantity_left+' left)'
+    h4= product.current_price
+      if product.quantity_left
+        =' ('+product.quantity_left+' left)'
     p= product.description
