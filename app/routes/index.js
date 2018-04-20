@@ -2,10 +2,9 @@
 
 const { Router } = require('express');
 const router = Router();
+const { displayAllCategories } = require('../controllers/productTypeCtrl.js');
 
-router.get('/', (req, res, next) => {
-  res.render('index');
-});
+router.get('/', displayAllCategories);
 
 // pipe all other requests through the route modules
 router.use(require('./authRoute'));
