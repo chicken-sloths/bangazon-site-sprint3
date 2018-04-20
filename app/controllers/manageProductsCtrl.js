@@ -2,7 +2,6 @@
 
 
 module.exports.displayUsersProducts = (req, res, next) => {
-  //Renders manage-products.pug
   let products;
   const { Product } = req.app.get('models');
   Product.findAll({
@@ -30,6 +29,7 @@ module.exports.displayUsersProducts = (req, res, next) => {
 };
 
 module.exports.removeProductFromSale = (req, res, next) => {
+  console.log("should be 2", req.id);
   //Updates a product's deleted status
   //Re-renders manage-products.pug? Or, client.js fn removes it from the DOM?
 };
