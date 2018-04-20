@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/categories/:id', getProductsByType);
-router.get('/search/:term', searchProductsByName);
+router.post('/search', searchProductsByName);
 
 // pipe all other requests through the route modules
 router.use(require('./authRoute'));
