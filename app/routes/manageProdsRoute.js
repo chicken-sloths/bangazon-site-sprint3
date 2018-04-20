@@ -1,7 +1,10 @@
 'use strict';
 
 const { Router } = require('express');
-const router = Router();
+const prodRouter = Router();
 const { getUserProds } = require('../controllers/manageProdsC');
 
-Router.get(('/products/:id'), getUserProds);
+
+prodRouter.get(('/products/:id'), getUserProds);
+
+module.exports = prodRouter;
