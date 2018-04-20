@@ -1,4 +1,4 @@
-if product.quantity_left > 0
+if product.quantity_left > 0 || state === "manage"
   .product
     h1
       a(href='/products/'+product.id)= product.title

@@ -21,7 +21,7 @@ module.exports.displayUsersProducts = (req, res, next) => {
         products.forEach((p, index) => {
           p.quantity_left = qtys[index];
         });
-        res.render('manage-products.pug', { products });
+        res.render('manage-products.pug', { products, state: "manage" });
       })
     })
     .catch( err => {
