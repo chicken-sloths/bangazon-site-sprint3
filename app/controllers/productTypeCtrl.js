@@ -1,6 +1,6 @@
 'use strict';
 
-const sequelize = require('sequelize');
+// const sequelize = require('sequelize');
 
 // These two fns render different views, so one could argue they need different
 // ctrls. In developing these, if it becomes clear to break them out, by all
@@ -9,8 +9,8 @@ const sequelize = require('sequelize');
 module.exports.displayAllCategories = (req, res, next) => {
   // Gets all categories & three products for each category
   // Renders index.pug
-  const { ProductType, Product } = req.app.get('models')
-    sequelize.query("SELECT * FROM `Products`", { type: sequelize.QueryTypes.SELECT})
+  const { sequelize } = req.app.get('models')
+    sequelize.query(`select "ProductTypes".title as type, "Products".title from "ProductTypes" join "Products" ON "Products".product_type_id = "ProductTypes".id`, { type: sequelize.QueryTypes.SELECT})
     .then(data => {
       console.log('wheres the fucking data',data);
       res.render('index', data);
