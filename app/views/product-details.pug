@@ -1,5 +1,16 @@
 extends layout
 
 block content
-//- A product's details page
-//- Button to add the product to authed user's cart
+  .card.col-sm-6.mx-auto.my-5
+    .card-body.text-center
+      h4.card-title= title
+      p.card-text
+        em= description
+      p Quantity: 
+        b= quantity
+      p $#{current_price} / each
+      form(name='add_to_cart' method='POST' action=`/product/${id}`)
+        button.btn.btn-success(name='add_to_cart' type='submit') Add to Cart
+  if query.added
+    h3.my-3.mx-auto.text-center Added to cart!
+    //- Maybe make the above a nice CSS animation so it disappears?
