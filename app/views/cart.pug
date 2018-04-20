@@ -1,6 +1,5 @@
 extends layout
 
 block content
-  //- Displays products in authed user's active order using product-card.pug
-  //- Those products can be deleted
-  //- Option to close an order
+  for product in products
+    include partials/product-card.pug
