@@ -12,13 +12,14 @@
 module.exports.getUserProds = ( (req, res, next) => {
   // console.log(req);
   const { Product } = req.app.get('models');
-  console.log(Product);
+  console.log("MDELS??", req.app.settings.models);
   console.log("should be id", req.params.id);
   Product.findAll({
     where: {
       creator_id: req.params.id,
       deleted: false
     }
+  })
     .then( products => {
       res.status(200).json(products);
     })
@@ -26,6 +27,5 @@ module.exports.getUserProds = ( (req, res, next) => {
       next(err);
     })
   })
-})
 
 //delete user's product
