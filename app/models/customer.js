@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     postal_code: DataTypes.INTEGER,
-    phone_number: DataTypes.STRING
+    phone_number: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING
   }, {});
   Customer.associate = function(models) {
     Customer.hasMany(models.Product, {
