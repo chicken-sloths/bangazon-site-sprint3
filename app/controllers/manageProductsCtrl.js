@@ -1,7 +1,9 @@
 'use strict';
 
+
 module.exports.displayUsersProducts = (req, res, next) => {
   //Renders manage-products.pug
+  let products;
   const { Product } = req.app.get('models');
   Product.findAll({
     where: {
@@ -9,8 +11,19 @@ module.exports.displayUsersProducts = (req, res, next) => {
       deleted: false
     }
   })
-    .then( products => {
-      res.status(200).json(products);
+    .then( prods => {
+      products = prods;
+      let qtyPromises = products.map(p => {
+        return p.getQuantityRemaining();
+      });
+      return Promise.all(qtyPromises)
+      .then(qtys => {
+        products.forEach((p, index) => {
+          p.quantity = qtys[index];
+        });
+        console.log("Products with quantities?", products);
+        res.render('manage-products.pug', { products });
+      })
     })
     .catch( err => {
       next(err);
