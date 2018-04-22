@@ -5,13 +5,11 @@ const productsRouter = Router();
 
 const { addNewProductForSale, renderAddProductForm, displayUsersProducts, removeProductFromSale } = require('../controllers/manageProductsCtrl');
 
-
-//TODO: CHANGE ROUTE TO /products/manage and utlize user req param instead of passing in id
 // renders view to show current user's products
 productsRouter.get(('/manage'), displayUsersProducts);
 
 // Patches product user wishes to delete with deleted: true
-productsRouter.patch(('/manage'), removeProductFromSale);
+productsRouter.patch(('/manage/:id'), removeProductFromSale);
 
 // render the form to add a new product
 productsRouter.get('/manage/new', renderAddProductForm);
