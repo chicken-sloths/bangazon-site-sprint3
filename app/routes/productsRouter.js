@@ -10,7 +10,7 @@ const { addNewProductForSale, renderAddProductForm, displayUsersProducts, remove
 // renders view to show current user's products
 productsRouter.get(('/manage/:id'), displayUsersProducts);
 
-productsRouter.delete(('/manage/:id'), removeProductFromSale);
+productsRouter.patch(('/manage/:id'), removeProductFromSale);
 
 // render the form to add a new product
 productsRouter.get('/manage/new', renderAddProductForm);
