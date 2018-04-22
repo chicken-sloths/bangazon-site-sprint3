@@ -35,9 +35,9 @@ module.exports.removeProductFromSale = (req, res, next) => {
     where: { id: req.params.id }
   })
     .then( productToUpdate => {
-      return Product.updateAttributes({ deleted: true })
+      return productToUpdate.updateAttributes({ deleted: true })
     })
-    .then(updateProduct => {
+    .then(updatedProduct => {
       res.json(updatedProduct);
     });
   //Updates a product's deleted status
