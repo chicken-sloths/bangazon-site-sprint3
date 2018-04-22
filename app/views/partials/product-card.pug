@@ -5,4 +5,4 @@ if product.quantity_left > 0 || state === "manage"
     h4= product.current_price + ' ('+product.quantity_left+' left)'
     p= product.description
     if state === "manage"
-      button.deleteProd delete
+      button(id=`${product.id}` class=`deleteBtn`) delete
