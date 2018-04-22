@@ -1,13 +1,12 @@
 'use strict';
 
-$(window).on('click', $(".deleteProd"), (event) => {
-  let $productId = event.target.id;
+$(".deleteProdBtn").on('click', (event) => {
+  let productId = event.target.id;
   $.ajax({
-    url: `http://localhost:8080/products/manage/${$productId}`,
+    url: `http://localhost:8080/products/manage/${productId}`,
     type: 'PATCH',
     success: function(result) {
-        console.log("deleted");
-        $(`#productCard${$productId}`).remove();
+        $(`#productCard${productId}`).remove();
     }
   });
 });

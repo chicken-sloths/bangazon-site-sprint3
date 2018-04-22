@@ -29,17 +29,20 @@ module.exports.displayUsersProducts = (req, res, next) => {
 };
 
 module.exports.removeProductFromSale = (req, res, next) => {
-  console.log("should be 2", req.params.id);
+  console.log(res);
   const { Product } = req.app.get('models');
   Product.find({
     where: { id: req.params.id }
   })
-    .then( productToUpdate => {
-      return productToUpdate.updateAttributes({ deleted: true })
-    })
-    .then(updatedProduct => {
-      res.json(updatedProduct);
-    });
+  .then( productToUpdate => {
+    return productToUpdate.updateAttributes({ deleted: true })
+  })
+  .then(updatedProduct => {
+    res.json(updatedProduct);
+  })
+  .catch(err => {
+    next(err);
+  })
 };
 
 // Gets product types and passes them into the Add Product Form
