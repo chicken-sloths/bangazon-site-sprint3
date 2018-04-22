@@ -8,9 +8,9 @@ const { addNewProductForSale, renderAddProductForm, displayUsersProducts, remove
 
 //TODO: CHANGE ROUTE TO /products/manage and utlize user req param instead of passing in id
 // renders view to show current user's products
-productsRouter.get(('/manage/:id'), displayUsersProducts);
+productsRouter.get(('/manage'), displayUsersProducts);
 
-productsRouter.patch(('/manage/:id'), removeProductFromSale);
+productsRouter.patch(('/manage'), removeProductFromSale);
 
 // render the form to add a new product
 productsRouter.get('/manage/new', renderAddProductForm);

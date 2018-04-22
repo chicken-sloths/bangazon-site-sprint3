@@ -7,7 +7,7 @@ module.exports.displayUsersProducts = (req, res, next) => {
   const { Product } = req.app.get('models');
   Product.findAll({
     where: {
-      creator_id: req.params.id,
+      creator_id: req.user.id,
       deleted: false
     }
   })
@@ -70,7 +70,7 @@ module.exports.addNewProductForSale = (req, res, next) => {
       deleted: false, 
       description: req.body.description, 
       product_type_id: req.body.product_type_id,
-      creator_id: 1 // THIS WILL BE THE CURRENT USER ID once we figure out how to get it
+      creator_id: req.user.id
     })
     .then(newRecord => {
       // this is a temp fix- this will re-route to product details for this product once we have that partial built
