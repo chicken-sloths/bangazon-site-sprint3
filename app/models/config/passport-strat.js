@@ -94,6 +94,7 @@ const LoginStrategy = new Strategy(
               "Can't find a user with those credentials. Please try again"
           });
         }
+
         if (!isValidPassword(user.password, password)) {
           return done(null, false, {
             message: "Incorrect password."

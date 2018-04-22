@@ -1,0 +1,4 @@
+for cat in prodType
+  h3 #{cat.type}(#{cat.array_agg.length})
+  for product in cat.array_agg.slice(0,3)
+      p=product
