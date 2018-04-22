@@ -1,5 +1,5 @@
 if product.quantity_left > 0 || state === "manage"
-  .product
+  div(id=`productCard${product.id}` class=`product`)
     h1
       a(href='/products/'+product.id)= product.title
     h4= product.current_price + ' ('+product.quantity_left+' left)'

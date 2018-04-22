@@ -40,8 +40,6 @@ module.exports.removeProductFromSale = (req, res, next) => {
     .then(updatedProduct => {
       res.json(updatedProduct);
     });
-  //Updates a product's deleted status
-  //Re-renders manage-products.pug? Or, client.js fn removes it from the DOM?
 };
 
 // Gets product types and passes them into the Add Product Form
