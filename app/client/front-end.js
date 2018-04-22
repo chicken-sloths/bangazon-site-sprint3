@@ -13,8 +13,9 @@ $('#staticDiv').on('click', 'yourSelector', function() {
 $(window).on('click', $(".deleteProd"), () => {
   console.log("hello");
   $.ajax({
-    url: 'products/manage/2',
+    url: 'http://localhost:8080/products/manage/2',
     type: 'DELETE',
+    return: 'false',
     success: function(result) {
         console.log("deleted");
     }

@@ -29,7 +29,14 @@ module.exports.displayUsersProducts = (req, res, next) => {
 };
 
 module.exports.removeProductFromSale = (req, res, next) => {
-  console.log("should be 2", req.id);
+  console.log("should be 2", req.params.id);
+  const { Product } = req.app.get('models');
+  Product.destroy({
+    where: { id: req.params.id }
+  })
+  .then( deletedProduct => {
+    console.log("deleted prods:", deletedProduct);
+  })
   //Updates a product's deleted status
   //Re-renders manage-products.pug? Or, client.js fn removes it from the DOM?
 };
