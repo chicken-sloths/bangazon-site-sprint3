@@ -29,6 +29,7 @@ module.exports.displayUsersProducts = (req, res, next) => {
     })
 };
 
+// Patches product user wishes to delete with deleted: true
 module.exports.removeProductFromSale = (req, res, next) => {
   const { Product } = req.app.get('models');
   Product.find({
