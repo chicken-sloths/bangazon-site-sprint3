@@ -1,6 +1,9 @@
 extends layout
 
-
 block content
-  h1= 'Bangazon Home'
+  h1 Bangazon
+  if messages.registerMsg
+    h2= messages.registerMsg
+  else if messages.welcomeBackMsg
+    h2 #{messages.welcomeBackMsg} #{session.passport.user.first_name}
   include partials/allProductTypes

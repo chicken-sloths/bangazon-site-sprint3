@@ -1,10 +1,12 @@
 if product.quantity_left == null || product.quantity_left > 0 || state === "manage"
-  div(id=`productCard${product.id}` class=`product`)
-    h1
-      a(href='/products/details/'+product.id)= product.title
-    h4= product.current_price
+  .col-md-6.col-lg-4.card.text-center.product(data-id=product.id, data-order-id=product.orderId)
+    h3.card-title
+      a(href='/products/details/' + product.id)= product.title
+    h4 $#{product.current_price}
       if product.quantity_left
         =' ('+product.quantity_left+' left)'
-    p= product.description
+    .card-description #{product.description}
     if state === "manage"
-      button(id=`${product.id}` class=`deleteProdBtn`) delete
+      button.deleteProdBtn.btn.btn-danger.mx-auto(data-id=product.id) Delete
+    if state === "cart"
+      button.deleteFromCart.btn.btn-danger.mx-auto(data-id=product.id, data-order-id=product.orderId) Delete

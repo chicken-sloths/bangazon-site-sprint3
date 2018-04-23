@@ -1,12 +1,12 @@
 'use strict';
 
 $(".deleteProdBtn").on('click', (event) => {
-  let productId = event.target.id;
+  let productId = event.target.dataset.id;
   $.ajax({
     url: `/products/manage/remove/${productId}`,
     type: 'PATCH',
-    success: function(result) {
-        $(`#productCard${productId}`).remove();
+    success: result => {
+        $(`.product[data-id=${productId}]`).remove();
     }
   });
 });
@@ -18,6 +18,17 @@ $(".deletePayOpBtn").on('click', (event) => {
     type: 'DELETE',
     success: result => {
         $(`.payment-option[data-id=${payOpId}]`).remove();
+    }
+  });
+});
+
+$(".deleteFromCart").on('click', (event) => {
+  let productOrderId = event.target.dataset.orderId;
+  $.ajax({
+    url: `/cart/${productOrderId}`,
+    type: 'DELETE',
+    success: result => {
+        $(`.product[data-order-id=${productOrderId}]`).remove();
     }
   });
 });

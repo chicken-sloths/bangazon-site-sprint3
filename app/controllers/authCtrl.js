@@ -8,11 +8,8 @@ module.exports.displayRegister = (req, res) => {
 
 module.exports.register = (req, res, next) => {
   if (req.body.password === req.body.confirmation) {
-    console.log('Trying to register new user');
-
     // first argument is name of the passport strategy we created in passport-strat.js
     passport.authenticate('local-signup', (err, user, msgObj) => {
-      console.log("Where are we? session.js", user );
 
       if (err) {  console.log(err); } //or return next(err)
       if (!user) { return res.render('register', msgObj); }
@@ -20,12 +17,11 @@ module.exports.register = (req, res, next) => {
       // Go ahead and login the new user once they are signed up
       req.logIn(user, (err) => {
         if (err) { return next(err); }
-        console.log("authenticated. Rerouting to welcome page!" );
         // Save a msg in a cookie whose value will be added to req
         // using https://www.npmjs.com/package/express-flash-2 docs, but installed express-flash
         req.flash('registerMsg', `Thanks for signing up, ${user.first_name}!`);
         // Redirect kicks off a new request and makes the route in the URL match the location we have sent the user to. That's why we have to create a flash message so it will persist through the new request of the welcome route
-        res.redirect('/welcome');
+        res.redirect('/');
       });
     })(req, res, next);
   } else {
@@ -41,9 +37,6 @@ module.exports.displayLogin = (req, res, next) => {
 module.exports.login = (req, res, next) => {
   // Note we're using different strategy, this time for logging in
   passport.authenticate('local-signin', (err, user, msgObj) => {
-    // If login fails, the error is sent back by the passport strategy as { message: "some msg"}
-    console.log('error msg?', msgObj);
-
     if (err) {  console.log(err) } //or return next(err) once handler set up in app.js
     if (!user) {
       return res.render('login', msgObj)
@@ -51,9 +44,8 @@ module.exports.login = (req, res, next) => {
 
     req.logIn(user, err => {
       if (err) { return next(err) }
-      console.log("authenticated. Rerouting to welcome!", user);
       req.flash('welcomeBackMsg',`Welcome back, `);
-      res.redirect('/welcome');
+      res.redirect('/');
     });
   })(req, res, next);
 };

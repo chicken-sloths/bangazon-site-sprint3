@@ -73,8 +73,7 @@ module.exports.addNewProductForSale = (req, res, next) => {
       creator_id: req.user.id
     })
     .then(newRecord => {
-      // this is a temp fix- this will re-route to product details for this product once we have that partial built
-      res.status(201).json(newRecord); 
+      res.redirect(`/products/details/${newRecord.id}`);
     })
     .catch(err => {
       next(err);
