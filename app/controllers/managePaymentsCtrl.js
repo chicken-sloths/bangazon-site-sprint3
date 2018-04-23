@@ -1,8 +1,17 @@
 'use strict';
 
 module.exports.displayPaymentOptions = (req, res, next) => {
-  // Gets authed user's payment options
-  // Renders manage-payments.pug
+  const { PaymentOption } = req.app.get('models');
+  PaymentOption.findAll({
+    where: {
+      customer_id: req.user.id,
+      deleted: false
+    }
+  })
+    .then(paymentOptions => {
+      console.log(paymentOptions);
+      res.render('manage-payments', { paymentOptions });
+    });
 };
 
 module.exports.displayAddNewPaymentOption = (req, res, next) => {
@@ -15,7 +24,20 @@ module.exports.addNewPaymentOption = (req, res, next) => {
 };
 
 module.exports.removePaymentOption = (req, res, next) => {
-  // Deletes payment option from user's account
-  // Re-renders manage-payments.pug?
-  // Or does a client.js fn remove that payment option from the DOM?
+  const { PaymentOption } = req.app.get('models');
+  PaymentOption.find({
+    where: {
+      id: req.params.id,
+      customer_id: req.user.id
+    }
+  })
+    .then(paymentToUpdate => {
+      return paymentToUpdate.updateAttributes({ deleted: true })
+    })
+    .then(updatedPayment => {
+      res.json(updatedPayment);
+    })
+    .catch(err => {
+      next(err);
+    });
 };

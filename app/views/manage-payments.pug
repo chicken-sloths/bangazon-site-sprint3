@@ -1,6 +1,10 @@
 extends layout
 
 block content
-  //- Displays user's payment options
-  //- Buttons for deleting payment options
-  //- Button for adding a new payment option
+  for payment in paymentOptions
+    .payment-option(data-id=payment.id)
+      h3= payment.type
+      p= 'Account Number: '
+        for digit in payment.account_number.toString()
+          ='•'
+        button.deletePayOpBtn(data-id=payment.id) delete
