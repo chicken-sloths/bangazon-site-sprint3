@@ -23,7 +23,7 @@ $(".deletePayOpBtn").on('click', (event) => {
 });
 
 $(".deleteFromCart").on('click', (event) => {
-  let productId = event.target.dataset.id;
+  let productOrderId = event.target.dataset.orderId;
   $.ajax({
     url: `/cart/${productOrderId}`,
     type: 'DELETE',
