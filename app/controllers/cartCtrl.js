@@ -33,3 +33,4 @@ module.exports.removeProductFromCart = (req, res, next) => {
   // Removes a product from authed user's cart
   // Re-renders cart.pug? Or does a client.js fn remove product-card from the DOM?
 };
+
