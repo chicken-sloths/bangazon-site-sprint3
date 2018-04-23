@@ -6,13 +6,15 @@ const { getProductsByType, displayAllCategories } = require('../controllers/prod
 const { searchProductsByName } = require('../controllers/searchCtrl');
 const { displayCart } = require('../controllers/cartCtrl');
 const { displayPaymentOptions, removePaymentOption } = require('../controllers/managePaymentsCtrl');
+const { displayUsersSettings } = require('../controllers/settingsCtrl');
+
 const checkAuth = require('./checkAuth');
 
 router.use((req, res, next) => {
   const { ProductType } = req.app.get('models');
   ProductType.findAll()
     .then(prodTypes => {
-      res.locals.categories = prodTypes; 
+      res.locals.categories = prodTypes;
       next();
     });
 });
@@ -20,9 +22,10 @@ router.use((req, res, next) => {
 router.get('/', displayAllCategories);
 router.get('/categories/:id', getProductsByType);
 router.post('/search', searchProductsByName);
+router.use('/products', require('./productsRouter'));
 
-// pipe all other requests through the route modules
 router.use(require('./authRoute'));
+
 
 router.use(checkAuth);
 
@@ -30,8 +33,7 @@ router.get('/cart', displayCart);
 router.get('/payment/manage', displayPaymentOptions);
 router.delete('/payment/:id', removePaymentOption);
 
-// require in all the products routes
-router.use('/products', require('./productsRouter'));
+router.get('/settings', displayUsersSettings);
 
 // require in all the payments routes
 router.use('/payments', require('./paymentsRouter'));
