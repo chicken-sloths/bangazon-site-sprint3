@@ -4,8 +4,8 @@
 1. Run `git clone` to pull this repo onto your local machine.
 1. In your terminal, run `npm install` to install the necessary dependencies
 1. Run `npm run db:gen` to build the database
-1. Then run `npm start` to start 
-1. 
+1. Then run `npm start` to start your server
+
 
 ## Summary
 A sales CLI for a mock Amazon + Etsy platform. Written by Nashville Software School Apprentice Developers during a week-long Agile sprint.
