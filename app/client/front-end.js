@@ -1,7 +1,6 @@
 'use strict';
 
 $(".deleteProdBtn").on('click', (event) => {
-  console.log(event.target.dataset.id);
   let productId = event.target.dataset.id;
   $.ajax({
     url: `/products/manage/remove/${productId}`,
@@ -13,7 +12,6 @@ $(".deleteProdBtn").on('click', (event) => {
 });
 
 $(".deletePayOpBtn").on('click', (event) => {
-  console.log(event.target.dataset.id);
   let payOpId = event.target.dataset.id;
   $.ajax({
     url: `/payment/${payOpId}`,
@@ -25,7 +23,6 @@ $(".deletePayOpBtn").on('click', (event) => {
 });
 
 $(".deleteFromCart").on('click', (event) => {
-  console.log(event.target.dataset.id);
   let productId = event.target.dataset.id;
   $.ajax({
     url: `/cart/remove/${productId}`,
