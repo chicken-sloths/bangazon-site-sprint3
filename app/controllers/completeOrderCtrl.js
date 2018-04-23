@@ -1,7 +1,18 @@
 'use strict';
 
 module.exports.displayCheckoutForm = (req, res, next) => {
-// Gets user's authed payment options
-// Renders complete-order.pug
-  res.render('complete-order');
+  const { PaymentOption } = req.app.get('models');
+  PaymentOption.findAll({ 
+    raw: true, 
+    where: {
+      customer_id: req.user.id,
+      deleted: false
+    }
+  })
+    .then(paymentOpts => {
+      res.render('complete-order', { paymentOpts});
+    })
+    .catch(err => {
+      next(err);
+    })
 };
