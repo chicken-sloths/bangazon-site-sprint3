@@ -28,10 +28,9 @@ router.get('/cart', displayCart);
 // require in all the products routes
 router.use('/products', require('./productsRouter'));
 
-//TODO: Sync with Kenzie on product route module
-const { displayAddNewPaymentOption, addNewPaymentOption } = require('../controllers/managePaymentsCtrl');
-router.get('/payments/new', displayAddNewPaymentOption);
-router.post('/payments/new', addNewPaymentOption);
+// require in all the payments routes
+router.use('/payments', require('./paymentsRouter'));
+
 
 // Default route
 router.use((req, res, next) => {
