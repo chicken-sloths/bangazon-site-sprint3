@@ -5,7 +5,7 @@ const router = Router();
 const { getProductsByType, displayAllCategories } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
 const { displayCart } = require('../controllers/cartCtrl');
-const { displayPaymentOptions } = require('../controllers/managePaymentsCtrl');
+const { displayPaymentOptions, removePaymentOption } = require('../controllers/managePaymentsCtrl');
 const checkAuth = require('./checkAuth');
 
 router.use((req, res, next) => {
@@ -28,6 +28,7 @@ router.use(checkAuth);
 
 router.get('/cart', displayCart);
 router.get('/payment/manage', displayPaymentOptions);
+router.delete('/payment/:id', removePaymentOption);
 
 // require in all the products routes
 router.use('/products', require('./productsRouter'));

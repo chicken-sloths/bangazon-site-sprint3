@@ -2,8 +2,9 @@ extends layout
 
 block content
   for payment in paymentOptions
-    .payment-option
+    .payment-option(data-id=payment.id)
       h3= payment.type
       p= 'Account Number: '
         for digit in payment.account_number.toString()
           ='•'
+        button.deletePayOpBtn(data-id=payment.id) delete

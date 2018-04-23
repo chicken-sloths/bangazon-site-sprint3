@@ -24,7 +24,20 @@ module.exports.addNewPaymentOption = (req, res, next) => {
 };
 
 module.exports.removePaymentOption = (req, res, next) => {
-  // Deletes payment option from user's account
-  // Re-renders manage-payments.pug?
-  // Or does a client.js fn remove that payment option from the DOM?
+  const { PaymentOption } = req.app.get('models');
+  PaymentOption.find({
+    where: {
+      id: req.params.id,
+      customer_id: req.user.id
+    }
+  })
+    .then(paymentToUpdate => {
+      return paymentToUpdate.updateAttributes({ deleted: true })
+    })
+    .then(updatedPayment => {
+      res.json(updatedPayment);
+    })
+    .catch(err => {
+      next(err);
+    });
 };
