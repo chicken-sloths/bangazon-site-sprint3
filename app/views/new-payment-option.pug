@@ -1,4 +1,8 @@
 extends layout
 
 block content
-  //- Form for adding a new payment option to a user's account
+  h1 Add New Payment Option
+  form(action="payments/new" method="post")
+    input(type="text" name="type" placeholder="Payment Type")
+    input(type="number" name="account_number" placeholder="Account Number")
+    button(type="submit" text="Submit") Add

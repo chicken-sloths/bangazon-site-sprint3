@@ -6,11 +6,12 @@ module.exports.displayPaymentOptions = (req, res, next) => {
 };
 
 module.exports.displayAddNewPaymentOption = (req, res, next) => {
-  // Renders new-payment-option.pug
+  res.render('new-payment-option');
 };
 
 module.exports.addNewPaymentOption = (req, res, next) => {
   // Posts validated form from new-payment-option.pug
+  {  }
   // Re-directs to manage-payments.pug
 };
 
