@@ -22,12 +22,15 @@ router.get('/categories/:id', displayCategory);
 router.post('/search', searchProductsByName);
 router.use('/products', require('./productsRouter'));
 
+// login, logout, register, welcome
+router.use(require('./authRoute'));
+
 // auth required below this point
-router.use(require('./authRoute')); 
+router.use(checkAuth);
+
 router.use('/cart', require('./cartRouter'));
 router.get('/settings', displayUsersSettings);
 router.use('/payment', require('./paymentsRouter'));
-
 
 // Default route
 router.use((req, res, next) => {
