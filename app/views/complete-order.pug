@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 Complete Your Order
-  form(action="/cart/checkout" method="PATCH")
+  form(action="/cart/checkout" method="POST")
     select(name="payment_option_id")
       each opt in paymentOpts
         option(value=opt.id) #{opt.type} | #{opt.account_number}
