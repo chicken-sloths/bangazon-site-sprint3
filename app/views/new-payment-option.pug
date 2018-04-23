@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 Add New Payment Option
-  form(action="/payments/new" method="post")
+  form(action="/payment/new" method="post")
     input(type="text" name="type" placeholder="Payment Type")
     input(type="number" name="account_number" placeholder="Account Number")
     button(type="submit" text="Submit") Add

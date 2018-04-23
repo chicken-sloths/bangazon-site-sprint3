@@ -5,7 +5,6 @@ const router = Router();
 const { getProductsByType, displayAllCategories } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
 const { displayCart } = require('../controllers/cartCtrl');
-const { displayPaymentOptions, removePaymentOption } = require('../controllers/managePaymentsCtrl');
 const { displayUsersSettings } = require('../controllers/settingsCtrl');
 
 const checkAuth = require('./checkAuth');
@@ -30,13 +29,11 @@ router.use(require('./authRoute'));
 router.use(checkAuth);
 
 router.get('/cart', displayCart);
-router.get('/payment/manage', displayPaymentOptions);
-router.delete('/payment/:id', removePaymentOption);
 
 router.get('/settings', displayUsersSettings);
 
 // require in all the payments routes
-router.use('/payments', require('./paymentsRouter'));
+router.use('/payment', require('./paymentsRouter'));
 
 
 // Default route

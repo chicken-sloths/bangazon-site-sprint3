@@ -29,7 +29,7 @@ module.exports.addNewPaymentOption = (req, res, next) => {
   })
   .then( addedPayment => {
     //TODO REDIRECT TO MANAGE PAYMENT
-    res.redirect('/welcome');
+    res.redirect('/payment/manage');
   })
   // Re-directs to manage-payments.pug
 };
