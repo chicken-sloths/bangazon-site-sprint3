@@ -1,28 +1,28 @@
-nav.navbar.navbar-expand-lg.navbar-light.bg-light
+nav.navbar.navbar-expand-md.navbar-light.bg-light
   a.navbar-brand(href='/') Bangazon
   ul.navbar-nav.mr-auto
-    li.nav-item.dropdown
+    li.nav-item.dropdown.my-auto
       a.nav-link.dropdown-toggle#catDrop(href='#', data-toggle='dropdown',aria-labelledby='#catDrop') Categories
       .dropdown-menu
         for cat in categories
           a.dropdown-item(href='/categories/'+cat.id)= cat.title
+    form(method='post', action='/search').form-inline.my-2.my-lg-0
+      input.form-control.mr-sm-2(type="search", name='term', placeholder="Search products", aria-label='Search')
+      button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
     if session.passport
-      li.nav-item.dropdown
-        a.nav-link.dropdown-toggle#settings(href='#', data-toggle='dropdown',aria-labelledby='#settings')= session.passport.user.email
+      li.my-auto.nav-item.dropdown
+        a.nav-link.dropdown-toggle#settings(href='#', data-toggle='dropdown',aria-labelledby='#settings')=session.passport.user.first_name
         .dropdown-menu
           a.dropdown-item(href='/settings') my account
           a.dropdown-item(href='/products/manage') manage products
           a.dropdown-item(href='/payment/manage') manage payment types
-        li.nav-item
-          a.nav-link(href='/cart') view cart
-        li.nav-item
+        li.nav-item.ml-3.my-auto
+          a.btn.btn-warning(href='/cart') Cart
+        li.nav-item.ml-3.my-auto
           form(method="POST")
-            button.nav-link(type="submit" formaction="/logout") logout
+            button.btn.btn-outline-secondary(type="submit" formaction="/logout") Logout
     if !session.passport
-      li.nav-item
-        a.nav-link(href='/login') login
-      li.nav-item
-        a.nav-link(href='/register') register
-    form(method='post', action='/search').form-inline.my-2.my-lg-0
-      input.form-control.mr-sm-2(type="search", name='term', placeholder="Search products", aria-label='Search')
-      button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+      li.nav-item.ml-3.my-auto
+        a.btn.btn-outline-primary(href='/login') Login
+      li.nav-item.ml-3.my-auto
+        a.btn.btn-outline-info(href='/register') Register
