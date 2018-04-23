@@ -1,5 +1,11 @@
 extends layout
 
 block content
-  for product in products
-    include partials/product-card.pug
+  h1 Cart
+  if message
+    h2=message
+    a.btn.btn-primary(href='/') Product Categories
+  else
+    .row
+      for product in products
+        include partials/product-card
