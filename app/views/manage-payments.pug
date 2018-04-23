@@ -1,11 +1,12 @@
 extends layout
 
 block content
+  h1 Manage Payment Options
   for payment in paymentOptions
-    .payment-option(data-id=payment.id)
+    .card.col-4.payment-option(data-id=payment.id)
       h3= payment.type
       p= 'Account Number: '
         for digit in payment.account_number.toString()
           ='•'
-        button.deletePayOpBtn(data-id=payment.id) delete
-  a.btn.btn-primary(href='/payment/new') Add Payment Option
+      button#deletePayOpBtn.btn.btn-danger.mx-auto.my-3(data-id=payment.id) Delete
+  a.btn.btn-primary.my-5(href='/payment/new') Add Payment Option
