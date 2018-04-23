@@ -9,7 +9,6 @@ module.exports.displayPaymentOptions = (req, res, next) => {
     }
   })
     .then(paymentOptions => {
-      console.log(paymentOptions);
       res.render('manage-payments', { paymentOptions });
     });
 };
