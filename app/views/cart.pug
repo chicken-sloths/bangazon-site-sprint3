@@ -3,3 +3,5 @@ extends layout
 block content
   for product in products
     include partials/product-card.pug
+  a(href='/cart/checkout')
+    button.btn.btn-primary(type='button') Complete Order
