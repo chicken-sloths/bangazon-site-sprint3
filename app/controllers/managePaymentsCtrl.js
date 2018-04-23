@@ -1,8 +1,17 @@
 'use strict';
 
 module.exports.displayPaymentOptions = (req, res, next) => {
-  // Gets authed user's payment options
-  // Renders manage-payments.pug
+  const { PaymentOption } = req.app.get('models');
+  PaymentOption.findAll({
+    where: {
+      customer_id: req.user.id,
+      deleted: false
+    }
+  })
+    .then(paymentOptions => {
+      console.log(paymentOptions);
+      res.render('manage-payments', { paymentOptions });
+    });
 };
 
 module.exports.displayAddNewPaymentOption = (req, res, next) => {
