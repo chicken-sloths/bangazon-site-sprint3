@@ -2,31 +2,32 @@
 
 const { Router } = require('express');
 const router = Router();
-const { getProductsByType, displayAllCategories } = require('../controllers/productTypesCtrl');
+const { displayCategory, displayAllCategories } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
-
+const { displayUsersSettings } = require('../controllers/settingsCtrl');
 const checkAuth = require('./checkAuth');
 
 router.use((req, res, next) => {
   const { ProductType } = req.app.get('models');
   ProductType.findAll()
     .then(prodTypes => {
-      res.locals.categories = prodTypes; 
+      res.locals.categories = prodTypes;
       next();
     });
 });
 
+// no auth required
 router.get('/', displayAllCategories);
-router.get('/categories/:id', getProductsByType);
+router.get('/categories/:id', displayCategory);
 router.post('/search', searchProductsByName);
-
-// pipe all other requests through the route modules
-router.use(require('./authRoute'));
-
-router.use('/cart', require('./cartRouter'));
-
-// require in all the products routes
 router.use('/products', require('./productsRouter'));
+
+// auth required below this point
+router.use(require('./authRoute')); 
+router.use('/cart', require('./cartRouter'));
+router.get('/settings', displayUsersSettings);
+router.use('/payment', require('./paymentsRouter'));
+
 
 // Default route
 router.use((req, res, next) => {
