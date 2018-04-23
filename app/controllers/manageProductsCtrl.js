@@ -1,8 +1,7 @@
 'use strict';
 
-
+// displays authenticated products
 module.exports.displayUsersProducts = (req, res, next) => {
-  console.log("WHAT THE FUCK HELLP");
   let products;
   const { Product } = req.app.get('models');
   Product.findAll({
@@ -29,9 +28,8 @@ module.exports.displayUsersProducts = (req, res, next) => {
     })
 };
 
-// Patches product user wishes to delete with deleted: true
+// result of client-side JS btn click, Patches attribute on product object from deleted: false to deleted: true and sends user back to manage product page
 module.exports.removeProductFromSale = (req, res, next) => {
-  console.log("WHAT THE FUCK HELLP FAK");
   const { Product } = req.app.get('models');
   Product.find({
     where: { id: req.params.id }

@@ -1,6 +1,6 @@
 extends layout
 
 block content
-  button.addProd Add New Product
+  a(href='/products/manage/new' class='addProd')= 'Add New Product'
   for product in products
     include partials/product-card.pug
