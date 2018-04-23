@@ -2,5 +2,10 @@ extends layout
 
 block content
   h1 Complete Your Order
-  //- Button to close order
-  //- Button to add new payment option (going to manage-payments)
+  form(action="/cart/checkout" method="PATCH")
+    select(name="payment_option_id")
+      each opt in paymentOpts
+        option(value=opt.id) #{opt.type} | #{opt.account_number}
+
+    //- Button to add new payment option (going to manage-payments)
+    button(type="submit" text="Submit") Submit

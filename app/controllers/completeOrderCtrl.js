@@ -10,7 +10,8 @@ module.exports.displayCheckoutForm = (req, res, next) => {
     }
   })
     .then(paymentOpts => {
-      res.render('complete-order', { paymentOpts});
+      console.log('paymentopts', paymentOpts);
+      res.render('complete-order', { paymentOpts });
     })
     .catch(err => {
       next(err);
