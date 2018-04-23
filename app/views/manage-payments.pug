@@ -8,5 +8,5 @@ block content
       p= 'Account Number: '
         for digit in payment.account_number.toString()
           ='•'
-      button#deletePayOpBtn.btn.btn-danger.mx-auto.my-3(data-id=payment.id) Delete
+      button.deletePayOpBtn.btn.btn-danger.mx-auto.my-3(data-id=payment.id) Delete
   a.btn.btn-primary.my-5(href='/payment/new') Add Payment Option

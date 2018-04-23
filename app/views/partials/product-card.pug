@@ -7,6 +7,6 @@ if product.quantity_left == null || product.quantity_left > 0 || state === "mana
         =' ('+product.quantity_left+' left)'
     .card-description #{product.description}
     if state === "manage"
-      button#deleteProdBtn.btn.btn-danger.mx-auto(data-id=product.id) Delete
+      button.deleteProdBtn.btn.btn-danger.mx-auto(data-id=product.id) Delete
     if state === "cart"
-      button#deleteFromCart.btn.btn-danger.mx-auto(data-id=product.id) Delete
+      button.deleteFromCart.btn.btn-danger.mx-auto(data-id=product.id) Delete
