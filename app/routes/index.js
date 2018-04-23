@@ -4,7 +4,7 @@ const { Router } = require('express');
 const router = Router();
 const { getProductsByType, displayAllCategories } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
-const { displayCart } = require('../controllers/cartCtrl');
+
 const checkAuth = require('./checkAuth');
 
 router.use((req, res, next) => {
@@ -23,7 +23,7 @@ router.post('/search', searchProductsByName);
 // pipe all other requests through the route modules
 router.use(require('./authRoute'));
 
-router.get('/cart', displayCart);
+router.use('/cart', require('./cartRouter'));
 
 // require in all the products routes
 router.use('/products', require('./productsRouter'));
