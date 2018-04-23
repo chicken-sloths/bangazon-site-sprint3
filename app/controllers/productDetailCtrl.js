@@ -50,7 +50,7 @@ module.exports.addToCart = (req, res, next) => {
       // Renders the page again b/c quantity needs to change
       // ?added=true is accessible at req.query, used in pug template for
       // success message. Not an optimal solution, but something for now
-      res.redirect(`/products/${product_id}?added=true`);
+      res.redirect(`/products/details/${product_id}?added=true`);
     });
   });
 };
