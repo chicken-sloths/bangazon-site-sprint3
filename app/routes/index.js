@@ -4,7 +4,7 @@ const { Router } = require('express');
 const router = Router();
 const { displayCategory, displayAllCategories } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
-const { displayCart } = require('../controllers/cartCtrl');
+const { displayCart, removeProductFromCart } = require('../controllers/cartCtrl');
 const { displayUsersSettings } = require('../controllers/settingsCtrl');
 
 const checkAuth = require('./checkAuth');
@@ -28,6 +28,7 @@ router.use(require('./authRoute'));
 
 router.use(checkAuth);
 
+router.delete('/cart/:id', removeProductFromCart);
 router.get('/cart', displayCart);
 
 router.get('/settings', displayUsersSettings);
