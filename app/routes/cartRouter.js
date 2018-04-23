@@ -11,6 +11,6 @@ cartRouter.use(checkAuth);
 cartRouter.get('/', displayCart);
 cartRouter.get('/checkout', displayCheckoutForm);
 cartRouter.post('/checkout', closeOrder);
-router.delete('/:id', removeProductFromCart);
+cartRouter.delete('/:id', removeProductFromCart);
 
 module.exports = cartRouter;
