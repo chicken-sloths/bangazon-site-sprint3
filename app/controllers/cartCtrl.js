@@ -9,6 +9,7 @@ module.exports.displayCart = (req, res, next) => {
     }
   })
     .then(activeOrder => {
+      if (activeOrder === null) return res.render('cart', {message: "Add some items to your cart"})
       return ProductOrder.findAll({
         where: {
           order_id: activeOrder.id
@@ -22,10 +23,11 @@ module.exports.displayCart = (req, res, next) => {
         return {
           id: po['Product.id'],
           title: po['Product.title'],
-          description: po['Product.description']
+          description: po['Product.description'],
+          current_price: po.price
         };
       });
-      res.render('cart.pug', { products });
+      res.render('cart.pug', { products, state: 'cart' });
     });
 };
 

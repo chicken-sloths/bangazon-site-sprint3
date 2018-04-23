@@ -1,6 +1,7 @@
 extends layout
 
 block content
-  a(href='/products/manage/new' class='addProd')= 'Add New Product'
+  h1 Manage Products
+  a.btn.btn-success.my-3.addProd(href='/products/manage/new') Add New Product
   for product in products
-    include partials/product-card.pug
+    include partials/product-card
