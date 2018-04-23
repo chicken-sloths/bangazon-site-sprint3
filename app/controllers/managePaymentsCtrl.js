@@ -13,13 +13,13 @@ module.exports.displayPaymentOptions = (req, res, next) => {
     });
 };
 
+//renders form for adding new payment type
 module.exports.displayAddNewPaymentOption = (req, res, next) => {
   res.render('new-payment-option');
 };
 
+// Posts new payment option for current user
 module.exports.addNewPaymentOption = (req, res, next) => {
-  // Posts validated form from new-payment-option.pug
-  console.log("RECEIVED FROM FORM", req.body);
   const { PaymentOption } = req.app.get('models');
   PaymentOption.create({
     type: req.body.type,
@@ -28,10 +28,8 @@ module.exports.addNewPaymentOption = (req, res, next) => {
     deleted: false
   })
   .then( addedPayment => {
-    //TODO REDIRECT TO MANAGE PAYMENT
     res.redirect('/payment/manage');
   })
-  // Re-directs to manage-payments.pug
 };
 
 module.exports.removePaymentOption = (req, res, next) => {
