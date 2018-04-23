@@ -1,0 +1,6 @@
+for cat in prodTypes
+  h3
+    a(href='/categories/'+cat.id) #{cat.title} (#{cat.products.length})
+  for product in cat.products.slice(0,3)
+      p
+        a(href='/products/details/'+product.id)= product.title

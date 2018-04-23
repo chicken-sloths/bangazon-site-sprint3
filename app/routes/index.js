@@ -2,25 +2,43 @@
 
 const { Router } = require('express');
 const router = Router();
-const { getProductsByType } = require('../controllers/productTypesCtrl');
+const { displayCategory, displayAllCategories } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
+const { displayCart } = require('../controllers/cartCtrl');
+const { displayUsersSettings } = require('../controllers/settingsCtrl');
+
 const checkAuth = require('./checkAuth');
 
-
-router.get('/', (req, res, next) => {
-  res.render('index');
+router.use((req, res, next) => {
+  const { ProductType } = req.app.get('models');
+  ProductType.findAll()
+    .then(prodTypes => {
+      res.locals.categories = prodTypes;
+      next();
+    });
 });
 
-router.get('/categories/:id', getProductsByType);
+router.get('/', displayAllCategories);
+router.get('/categories/:id', displayCategory);
 router.post('/search', searchProductsByName);
+router.use('/products', require('./productsRouter'));
 
-// pipe all other requests through the route modules
 router.use(require('./authRoute'));
+
+
 router.use(checkAuth);
 
-// router.use(require('./foo'));
+router.get('/cart', displayCart);
 
-// require in all the products routes
-router.use('/products', require('./productsRouter'));
+router.get('/settings', displayUsersSettings);
+
+// require in all the payments routes
+router.use('/payment', require('./paymentsRouter'));
+
+
+// Default route
+router.use((req, res, next) => {
+  res.redirect('/');
+});
 
 module.exports = router;

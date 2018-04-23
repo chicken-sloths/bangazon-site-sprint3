@@ -4,13 +4,15 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
     li.nav-item.dropdown
       a.nav-link.dropdown-toggle#catDrop(href='#', data-toggle='dropdown',aria-labelledby='#catDrop') Categories
       .dropdown-menu
-        a.dropdown-item(href='/categories/3') 3 (replace later)
+        for cat in categories
+          a.dropdown-item(href='/categories/'+cat.id)= cat.title
     if session.passport
       li.nav-item.dropdown
         a.nav-link.dropdown-toggle#settings(href='#', data-toggle='dropdown',aria-labelledby='#settings')= session.passport.user.email
         .dropdown-menu
           a.dropdown-item(href='/settings') my account
           a.dropdown-item(href='/products/manage') manage products
+          a.dropdown-item(href='/payment/manage') manage payment types
         li.nav-item
           a.nav-link(href='/cart') view cart
         li.nav-item

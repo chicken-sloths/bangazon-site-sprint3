@@ -1,8 +1,32 @@
 'use strict';
 
 module.exports.displayCart = (req, res, next) => {
-  // Gets authed user's active order
-  // Renders cart.pug
+  const { Product, Order, ProductOrder } = req.app.get('models');
+  Order.find({
+    where: {
+      payment_option_id: null,
+      customer_id: req.user.id
+    }
+  })
+    .then(activeOrder => {
+      return ProductOrder.findAll({
+        where: {
+          order_id: activeOrder.id
+        },
+        include: [{ model: Product }],
+        raw: true
+      })
+    })
+    .then(productOrders => {
+      let products = productOrders.map(po => {
+        return {
+          id: po['Product.id'],
+          title: po['Product.title'],
+          description: po['Product.description']
+        };
+      });
+      res.render('cart.pug', { products });
+    });
 };
 
 module.exports.removeProductFromCart = (req, res, next) => {

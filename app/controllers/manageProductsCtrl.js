@@ -1,12 +1,48 @@
 'use strict';
 
+// displays authenticated products
 module.exports.displayUsersProducts = (req, res, next) => {
-  //Renders manage-products.pug
+  let products;
+  const { Product } = req.app.get('models');
+  Product.findAll({
+    where: {
+      creator_id: req.user.id,
+      deleted: false
+    }
+  })
+    .then( prods => {
+      products = prods;
+      let qtyPromises = products.map(p => {
+        return p.getQuantityRemaining();
+      });
+      return Promise.all(qtyPromises)
+      .then(qtys => {
+        products.forEach((p, index) => {
+          p.quantity_left = qtys[index];
+        });
+        res.render('manage-products.pug', { products, state: "manage" });
+      })
+    })
+    .catch( err => {
+      next(err);
+    })
 };
 
+// result of client-side JS btn click, Patches attribute on product object from deleted: false to deleted: true and sends user back to manage product page
 module.exports.removeProductFromSale = (req, res, next) => {
-  //Updates a product's deleted status
-  //Re-renders manage-products.pug? Or, client.js fn removes it from the DOM?
+  const { Product } = req.app.get('models');
+  Product.find({
+    where: { id: req.params.id }
+  })
+  .then( productToUpdate => {
+    return productToUpdate.updateAttributes({ deleted: true })
+  })
+  .then(updatedProduct => {
+    res.json(updatedProduct);
+  })
+  .catch(err => {
+    next(err);
+  })
 };
 
 // Gets product types and passes them into the Add Product Form

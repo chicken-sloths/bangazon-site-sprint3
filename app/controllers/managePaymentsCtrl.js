@@ -1,21 +1,52 @@
 'use strict';
 
 module.exports.displayPaymentOptions = (req, res, next) => {
-  // Gets authed user's payment options
-  // Renders manage-payments.pug
+  const { PaymentOption } = req.app.get('models');
+  PaymentOption.findAll({
+    where: {
+      customer_id: req.user.id,
+      deleted: false
+    }
+  })
+    .then(paymentOptions => {
+      res.render('manage-payments', { paymentOptions });
+    });
 };
 
+//renders form for adding new payment type
 module.exports.displayAddNewPaymentOption = (req, res, next) => {
-  // Renders new-payment-option.pug
+  res.render('new-payment-option');
 };
 
+// Posts new payment option for current user
 module.exports.addNewPaymentOption = (req, res, next) => {
-  // Posts validated form from new-payment-option.pug
-  // Re-directs to manage-payments.pug
+  const { PaymentOption } = req.app.get('models');
+  PaymentOption.create({
+    type: req.body.type,
+    account_number: req.body.account_number,
+    customer_id: req.user.id,
+    deleted: false
+  })
+  .then( addedPayment => {
+    res.redirect('/payment/manage');
+  })
 };
 
 module.exports.removePaymentOption = (req, res, next) => {
-  // Deletes payment option from user's account
-  // Re-renders manage-payments.pug?
-  // Or does a client.js fn remove that payment option from the DOM?
+  const { PaymentOption } = req.app.get('models');
+  PaymentOption.find({
+    where: {
+      id: req.params.id,
+      customer_id: req.user.id
+    }
+  })
+    .then(paymentToUpdate => {
+      return paymentToUpdate.updateAttributes({ deleted: true })
+    })
+    .then(updatedPayment => {
+      res.json(updatedPayment);
+    })
+    .catch(err => {
+      next(err);
+    });
 };
