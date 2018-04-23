@@ -20,7 +20,8 @@ module.exports.addNewPaymentOption = (req, res, next) => {
     deleted: false
   })
   .then( addedPayment => {
-    console.log(addedPayment);
+    //TODO REDIRECT TO MANAGE PAYMENT
+    res.redirect('/welcome');
   })
   // Re-directs to manage-payments.pug
 };
