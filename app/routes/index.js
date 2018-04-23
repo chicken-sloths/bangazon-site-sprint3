@@ -4,9 +4,7 @@ const { Router } = require('express');
 const router = Router();
 const { displayCategory, displayAllCategories } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
-const { displayCart } = require('../controllers/cartCtrl');
 const { displayUsersSettings } = require('../controllers/settingsCtrl');
-
 const checkAuth = require('./checkAuth');
 
 router.use((req, res, next) => {
@@ -18,21 +16,16 @@ router.use((req, res, next) => {
     });
 });
 
+// no auth required
 router.get('/', displayAllCategories);
 router.get('/categories/:id', displayCategory);
 router.post('/search', searchProductsByName);
 router.use('/products', require('./productsRouter'));
 
-router.use(require('./authRoute'));
-
-
-router.use(checkAuth);
-
-router.get('/cart', displayCart);
-
+// auth required below this point
+router.use(require('./authRoute')); 
+router.use('/cart', require('./cartRouter'));
 router.get('/settings', displayUsersSettings);
-
-// require in all the payments routes
 router.use('/payment', require('./paymentsRouter'));
 
 

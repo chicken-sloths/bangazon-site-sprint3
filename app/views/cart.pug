@@ -9,3 +9,5 @@ block content
     .row
       for product in products
         include partials/product-card
+    a(href='/cart/checkout')
+      button.btn.btn-primary(type='button') Complete Order
