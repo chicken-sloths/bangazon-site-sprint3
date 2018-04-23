@@ -58,3 +58,4 @@ module.exports.removeProductFromCart = (req, res, next) => {
     })
     .catch(err => next(err));
 };
+
