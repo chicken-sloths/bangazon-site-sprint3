@@ -2,7 +2,7 @@
 
 
 module.exports.displayUsersProducts = (req, res, next) => {
-  console.log("THIS IS ID???????????????", req.user.id);
+  console.log("WHAT THE FUCK HELLP");
   let products;
   const { Product } = req.app.get('models');
   Product.findAll({
@@ -31,6 +31,7 @@ module.exports.displayUsersProducts = (req, res, next) => {
 
 // Patches product user wishes to delete with deleted: true
 module.exports.removeProductFromSale = (req, res, next) => {
+  console.log("WHAT THE FUCK HELLP FAK");
   const { Product } = req.app.get('models');
   Product.find({
     where: { id: req.params.id }

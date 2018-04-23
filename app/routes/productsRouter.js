@@ -9,7 +9,7 @@ const { addToCart, displayProductDetail } = require('../controllers/productDetai
 
 // all routes up here do not require authentication
 
-productsRouter.get('/:id', displayProductDetail);
+productsRouter.get('/details/:id', displayProductDetail);
 
 //all routes below this line will require authentication
 productsRouter.use(checkAuth);
@@ -18,7 +18,7 @@ productsRouter.use(checkAuth);
 productsRouter.get(('/manage'), displayUsersProducts);
 
 // Patches product user wishes to delete with deleted: true
-productsRouter.patch(('/manage/:id'), removeProductFromSale);
+productsRouter.patch(('/manage/remove/:id'), removeProductFromSale);
 
 // render the form to add a new product
 productsRouter.get('/manage/new', renderAddProductForm);
