@@ -22,9 +22,10 @@ router.use((req, res, next) => {
 router.get('/', displayAllCategories);
 router.get('/categories/:id', getProductsByType);
 router.post('/search', searchProductsByName);
+router.use('/products', require('./productsRouter'));
 
-// pipe all other requests through the route modules
 router.use(require('./authRoute'));
+
 
 router.use(checkAuth);
 
@@ -32,10 +33,7 @@ router.get('/cart', displayCart);
 router.get('/payment/manage', displayPaymentOptions);
 router.delete('/payment/:id', removePaymentOption);
 
-router.get('/settings', checkAuth, displayUsersSettings);
-
-// require in all the products routes
-router.use('/products', require('./productsRouter'));
+router.get('/settings', displayUsersSettings);
 
 // Default route
 router.use((req, res, next) => {
