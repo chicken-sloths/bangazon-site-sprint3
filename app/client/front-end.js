@@ -1,6 +1,6 @@
 'use strict';
 
-$("#deleteProdBtn").on('click', (event) => {
+$(".deleteProdBtn").on('click', (event) => {
   let productId = event.target.dataset.id;
   $.ajax({
     url: `/products/manage/remove/${productId}`,
@@ -11,7 +11,7 @@ $("#deleteProdBtn").on('click', (event) => {
   });
 });
 
-$("#deletePayOpBtn").on('click', (event) => {
+$(".deletePayOpBtn").on('click', (event) => {
   let payOpId = event.target.dataset.id;
   $.ajax({
     url: `/payment/${payOpId}`,
@@ -22,8 +22,8 @@ $("#deletePayOpBtn").on('click', (event) => {
   });
 });
 
-$("#deleteFromCart").on('click', (event) => {
-  let productOrderId = event.target.dataset.orderId;
+$(".deleteFromCart").on('click', (event) => {
+  let productId = event.target.dataset.id;
   $.ajax({
     url: `/cart/${productOrderId}`,
     type: 'DELETE',
