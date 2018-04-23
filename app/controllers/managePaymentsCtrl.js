@@ -11,7 +11,17 @@ module.exports.displayAddNewPaymentOption = (req, res, next) => {
 
 module.exports.addNewPaymentOption = (req, res, next) => {
   // Posts validated form from new-payment-option.pug
-  {  }
+  console.log("RECEIVED FROM FORM", req.body);
+  const { PaymentOption } = req.app.get('models');
+  PaymentOption.create({
+    type: req.body.type,
+    account_number: req.body.account_number,
+    customer_id: req.user.id,
+    deleted: false
+  })
+  .then( addedPayment => {
+    console.log(addedPayment);
+  })
   // Re-directs to manage-payments.pug
 };
 
