@@ -2,7 +2,7 @@
 
 const { Router } = require('express');
 const router = Router();
-const { getProductsByType, displayAllCategories } = require('../controllers/productTypesCtrl');
+const { displayCategory, displayAllCategories } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
 const { displayCart } = require('../controllers/cartCtrl');
 const { displayPaymentOptions, removePaymentOption } = require('../controllers/managePaymentsCtrl');
@@ -20,7 +20,7 @@ router.use((req, res, next) => {
 });
 
 router.get('/', displayAllCategories);
-router.get('/categories/:id', getProductsByType);
+router.get('/categories/:id', displayCategory);
 router.post('/search', searchProductsByName);
 router.use('/products', require('./productsRouter'));
 
