@@ -18,14 +18,13 @@ module.exports.displayCheckoutForm = (req, res, next) => {
 };
 
 module.exports.closeOrder = (req, res, next) => {
-  console.log('CLOSE ORDER FUNCTION CALLED!');
   const { Order } = req.app.get('models');
   const newData = {
     payment_option_id: req.body.payment_option_id
   };
 
-  Order.update(newData, { where: { customer_id: req.user.id } })
+  Order.update(newData, { where: { customer_id: req.user.id, payment_option_id : null } })
     .then(updatedOrder => {
-      console.log(updatedOrder)
+      res.render('order-confirmation');
     })
 }
