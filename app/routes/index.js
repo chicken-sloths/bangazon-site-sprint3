@@ -7,8 +7,16 @@ const { searchProductsByName } = require('../controllers/searchCtrl');
 const { displayCart } = require('../controllers/cartCtrl');
 const checkAuth = require('./checkAuth');
 
-router.get('/', displayAllCategories);
+router.use((req, res, next) => {
+  const { ProductType } = req.app.get('models');
+  ProductType.findAll()
+    .then(prodTypes => {
+      res.locals.categories = prodTypes; 
+      next();
+    });
+});
 
+router.get('/', displayAllCategories);
 router.get('/categories/:id', getProductsByType);
 router.post('/search', searchProductsByName);
 

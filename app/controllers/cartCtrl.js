@@ -2,7 +2,6 @@
 
 module.exports.displayCart = (req, res, next) => {
   const { Product, Order, ProductOrder } = req.app.get('models');
-  req.isAuthenticated();
   Order.find({
     where: {
       payment_option_id: null,
