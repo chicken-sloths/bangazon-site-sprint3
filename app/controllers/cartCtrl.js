@@ -10,7 +10,7 @@ module.exports.displayCart = (req, res, next) => {
   })
     .then(activeOrder => {
       console.log("active order xxxxx", activeOrder);
-      
+
       if (activeOrder === null) return res.render('cart', { message: "Add some items to your cart" });
       return ProductOrder.findAll({
         where: {
@@ -21,11 +21,12 @@ module.exports.displayCart = (req, res, next) => {
       })
     })
     .then(productOrders => {
+      console.log("yyyy", productOrders);
       if (productOrders.length === 0) return res.render('cart', { message: "Add some items to your cart" });
       let products = productOrders.map(po => {
         return {
           id: po['Product.id'],
-          orderId: po.id,
+          orderId: po.order_id,
           title: po['Product.title'],
           description: po['Product.description'],
           current_price: po.price
