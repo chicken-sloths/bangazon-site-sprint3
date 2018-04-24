@@ -20,5 +20,8 @@ module.exports.editUserSettings = (req, res, next) => {
     postal_code: req.body.postal_code,
     phone_number: req.body.phone_number,
   }
-
+  Customer.update(newData, {where: {customer_id: req.user.id}})
+  .then(updatedCustomer => {
+    module.exports.displayUsersSettings(req, res, next);
+  })
 }
