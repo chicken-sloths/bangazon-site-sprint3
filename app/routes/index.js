@@ -2,11 +2,16 @@
 
 const { Router } = require('express');
 const router = Router();
-const { displayCategory, displayAllCategories } = require('../controllers/productTypesCtrl');
-const { searchProductsByName } = require('../controllers/searchCtrl');
-const { displayUsersSettings } = require('../controllers/settingsCtrl');
 const checkAuth = require('./checkAuth');
 
+const {
+  displayCategory,
+  displayAllCategories
+} = require('../controllers/productTypesCtrl');
+const { searchProductsByName } = require('../controllers/searchCtrl');
+const { displayUsersSettings } = require('../controllers/settingsCtrl');
+
+// middleware to populate categories in nav bar
 router.use((req, res, next) => {
   const { ProductType } = req.app.get('models');
   ProductType.findAll()
