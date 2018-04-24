@@ -3,10 +3,11 @@ module.exports = (sequelize, DataTypes) => {
   const ProductOrder = sequelize.import('./productorder');
   var Product = sequelize.define('Product', {
     current_price: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL,
     validate: {
       notEmpty: true,
-      isNumeric: true // will only allow numbers
+      isFloat: true,
+      min: 0
       }
     },
     title: {
@@ -19,7 +20,11 @@ module.exports = (sequelize, DataTypes) => {
     quantity: {
       type: DataTypes.INTEGER,
     validate: {
-      isInt: true
+      // isInt: true,
+      min: {
+        value: 1,
+        msg: "Quantity must be greater than 0"
+        }
       }
     },
     deleted: DataTypes.BOOLEAN,
