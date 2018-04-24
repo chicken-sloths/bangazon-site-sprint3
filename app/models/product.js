@@ -2,14 +2,35 @@
 module.exports = (sequelize, DataTypes) => {
   const ProductOrder = sequelize.import('./productorder');
   var Product = sequelize.define('Product', {
-    current_price: DataTypes.STRING,
-    title: DataTypes.STRING,
+    current_price: {
+      type: DataTypes.STRING,
+    validate: {
+      notEmpty: true,
+      isNumeric: true // will only allow numbers
+      }
+    },
+    title: {
+      type: DataTypes.STRING,
+    validate: {
+      notEmpty: true
+      }
+    },
     creation_date: DataTypes.STRING,
-    quantity: DataTypes.INTEGER,
+    quantity: {
+      type: DataTypes.INTEGER,
+    validate: {
+      isInt: true
+      }
+    },
     deleted: DataTypes.BOOLEAN,
-    description: DataTypes.STRING,
-    product_type_id: DataTypes.INTEGER,
-    creator_id: DataTypes.INTEGER
+    description: {
+      type: DataTypes.STRING,
+    validate: {
+      notEmpty: true
+      }
+    },
+    product_type_id: DataTypes.TINYINT,
+    creator_id: DataTypes.TINYINT
   }, {});
   Product.associate = function (models) {
     Product.belongsTo(models.Customer, {
