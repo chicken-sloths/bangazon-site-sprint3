@@ -66,3 +66,20 @@ module.exports.displayCategory = (req, res, next) => {
       res.render('product-type.pug', { products, prodType });
     });
 };
+
+
+module.exports.getLatestProducts = (req, res, next) => {
+  Product.findAll({ 
+    limit: 8 
+  }, {
+    order: sequelize.literal('max(age) DESC')
+  })
+  .then(products => {
+    console.log('products!');
+    console.log(products);
+    res.render('index', { products });
+  })
+  .catch(err => {
+    console.log('err');
+  })
+}
