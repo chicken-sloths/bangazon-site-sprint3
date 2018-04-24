@@ -32,15 +32,21 @@ module.exports.getOrderHistory = (req, res, next) => {
           include: [{
             model: Product
           }],
+          order: [
+            ['id', 'DESC']
+          ],
           raw: true
         });
       })
       return Promise.all(productPromises);
     })
     .then(products => {
-      console.log(products);
       orderHistory = orderHistory.map((o, index) => {
+        o.sum = 0;
+        o.updatedAt = new Date(o.updatedAt);
+        o['createdAt'] = new Date(o['createdAt']);
         o.products = products[index].map(p => {
+          o.sum += +p['Product.current_price'];
           return {
             title: p['Product.title'],
             price: p['Product.current_price']
