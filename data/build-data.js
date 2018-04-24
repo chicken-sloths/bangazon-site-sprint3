@@ -25,7 +25,6 @@ fs.exists(jsonDir, folderExists => {
 const writeJson = (jsonDir) => {
   let {
     customers,
-    productTypes,
     products,
     paymentOptions,
     orders,
@@ -34,8 +33,6 @@ const writeJson = (jsonDir) => {
 
   fs.createWriteStream(jsonDir+"/customers.json").write(JSON.stringify(customers));
   
-  fs.createWriteStream(jsonDir+"/productTypes.json").write(JSON.stringify(productTypes));
-
   fs.createWriteStream(jsonDir+"/products.json").write(JSON.stringify(products));
 
   fs.createWriteStream(jsonDir+"/paymentOptions.json").write(JSON.stringify(paymentOptions));

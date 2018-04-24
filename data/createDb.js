@@ -6,7 +6,6 @@ const app = require('../app/app');
 const models = require('../app/models');
 
 const customers = require('./json/customers');
-const productTypes = require('./json/productTypes');
 const paymentOptions = require('./json/paymentOptions');
 const products = require('./json/products');
 const orders = require('./json/orders');
@@ -16,9 +15,6 @@ const createDb = qi => {
   return models.sequelize.sync({force: true})
     .then(qi => {
       return models.Customer.bulkCreate(customers);
-    })
-    .then(qi => {
-      return models.ProductType.bulkCreate(productTypes);
     })
     .then(qi => {
       return models.PaymentOption.bulkCreate(paymentOptions);
