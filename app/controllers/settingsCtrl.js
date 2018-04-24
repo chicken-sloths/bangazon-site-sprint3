@@ -35,4 +35,8 @@ module.exports.editUserSettings = (req, res, next) => {
   .then(updatedCustomer => {
     module.exports.displayUsersSettings(req, res, next);
   })
+  .catch(err => {
+    console.log(err);
+    module.exports.renderEditForm(req, res, next);
+  })
 }
