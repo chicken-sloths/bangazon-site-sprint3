@@ -1,16 +1,67 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Customer = sequelize.define('Customer', {
-    first_name: DataTypes.STRING,
-    last_name: DataTypes.STRING,
+    first_name: { 
+      type: DataTypes.STRING,
+      validate: {
+        isAlpha: true,
+        notEmpty: true
+      }
+    },
+    last_name: {
+      type: DataTypes.STRING,
+      validate: {
+        isAlpha: true,
+        notEmpty: true
+      }
+    },
     account_creation_date: DataTypes.STRING,
-    street_address: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING,
-    postal_code: DataTypes.INTEGER,
-    phone_number: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
+    street_address: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    city: {
+      type: DataTypes.STRING,
+      validate: {
+        isAlpha: true,
+        notEmpty: true
+      }
+    },
+    state: {
+      type: DataTypes.STRING,
+      validate: {
+        isAlpha: true,
+        notEmpty: true
+      }
+    },
+    postal_code: {
+      type: DataTypes.INTEGER,
+      validate: {
+        isNumeric: true,
+        notEmpty: true
+      }
+    },
+    phone_number: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: true,
+        notEmpty: true
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    }
   }, {});
   Customer.associate = function(models) {
     Customer.hasMany(models.Product, {
