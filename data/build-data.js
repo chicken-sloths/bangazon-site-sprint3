@@ -25,6 +25,7 @@ fs.exists(jsonDir, folderExists => {
 const writeJson = (jsonDir) => {
   let {
     customers,
+    productTypes,
     products,
     paymentOptions,
     orders,
