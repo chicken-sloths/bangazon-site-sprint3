@@ -9,7 +9,7 @@ module.exports.displayCart = (req, res, next) => {
     }
   })
     .then(activeOrder => {
-      if (activeOrder === null) return res.render('cart', { message: "Add some items to your cart" })
+      if (activeOrder === null) return res.render('cart', { message: "Add some items to your cart" });
       return ProductOrder.findAll({
         where: {
           order_id: activeOrder.id
@@ -19,6 +19,7 @@ module.exports.displayCart = (req, res, next) => {
       })
     })
     .then(productOrders => {
+      if (productOrders.length === 0) return res.render('cart', { message: "Add some items to your cart" });
       let products = productOrders.map(po => {
         return {
           id: po['Product.id'],
@@ -59,3 +60,38 @@ module.exports.removeProductFromCart = (req, res, next) => {
     .catch(err => next(err));
 };
 
+module.exports.addToCart = (req, res, next) => {
+  const product_id = req.params.id;
+  const { Product, ProductOrder, Order } = req.app.get('models');
+
+  Order.findOrCreate({
+    where: {
+      customer_id: req.user.id,
+      payment_option_id: null
+    },
+    default: {
+      customer_id: req.user.id,
+      payment_option_id: null
+    }
+  })
+    .then(([resp]) => {
+      const order_id = resp.dataValues.id;
+
+      Product.findById(product_id)
+        .then(({ dataValues: { current_price } }) => {
+          const price = current_price;
+
+          return ProductOrder.create({
+            order_id,
+            price,
+            product_id
+          });
+        })
+        .then(resp => {
+          // Renders the page again b/c quantity needs to change
+          // ?added=true is accessible at req.query, used in pug template for
+          // success message. Not an optimal solution, but something for now
+          res.redirect(`/products/details/${product_id}?added=true`);
+        });
+    });
+};

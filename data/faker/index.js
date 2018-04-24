@@ -4,8 +4,6 @@ const { _generateOrders } = require('./_ordersFaker');
 const { _generatePaymentOptions } = require('./_paymentOptionsFaker');
 const { _generateProductOrders } = require('./_productOrdersFaker');
 const { _generateProducts } = require('./_productsFaker');
-const { _generateProductTypes } = require('./_productTypesFaker');
-
 
 module.exports.generateProductData = () => {
   const fakerSpecs = {
@@ -17,11 +15,16 @@ module.exports.generateProductData = () => {
   };
  
   const customers = _generateCustomers(fakerSpecs),
-        productTypes = _generateProductTypes(fakerSpecs),
         products = _generateProducts(fakerSpecs),
         paymentOptions = _generatePaymentOptions(fakerSpecs),
         orders = _generateOrders(fakerSpecs, customers, paymentOptions),
         productOrders = _generateProductOrders(fakerSpecs, orders, products);
 
-  return {customers, productTypes, products, paymentOptions, orders, productOrders};
+  return {
+    customers,
+    products,
+    paymentOptions,
+    orders,
+    productOrders
+  };
 };
