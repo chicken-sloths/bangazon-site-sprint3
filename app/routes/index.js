@@ -4,10 +4,7 @@ const { Router } = require('express');
 const router = Router();
 const checkAuth = require('./checkAuth');
 
-const {
-  displayCategory,
-  displayAllCategories
-} = require('../controllers/productTypesCtrl');
+const { displayHomePage , displayCategory } = require('../controllers/homepageCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
 
 // middleware to populate categories in nav bar
@@ -21,7 +18,7 @@ router.use((req, res, next) => {
 });
 
 // no auth required
-router.get('/', displayAllCategories);
+router.get('/', displayHomePage);
 router.get('/categories/:id', displayCategory);
 router.post('/search', searchProductsByName);
 router.use('/products', require('./productsRouter'));
