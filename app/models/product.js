@@ -7,7 +7,10 @@ module.exports = (sequelize, DataTypes) => {
     validate: {
       notEmpty: true,
       isFloat: true,
-      min: 0
+      min: {
+        args: 0,
+        msg: "Price must be greater than 0"
+        }
       }
     },
     title: {
@@ -20,10 +23,10 @@ module.exports = (sequelize, DataTypes) => {
     quantity: {
       type: DataTypes.INTEGER,
     validate: {
-      // isInt: true,
+      isInt: true,
       min: {
-        value: 1,
-        msg: "Quantity must be greater than 0"
+        args: 1,
+        msg: "Quantity must be greater than 1"
         }
       }
     },
