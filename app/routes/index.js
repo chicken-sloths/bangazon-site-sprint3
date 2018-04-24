@@ -10,8 +10,6 @@ const {
 } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
 
-const checkAuth = require('./checkAuth');
-
 // middleware to populate categories in nav bar
 router.use((req, res, next) => {
   const { ProductType } = req.app.get('models');
