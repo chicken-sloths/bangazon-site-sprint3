@@ -13,8 +13,8 @@ module.exports.displayUsersSettings = (req, res, next) => {
 module.exports.renderEditForm = (req, res, next) => {
   const { Customer } = req.app.get('models');
   Customer.findById(req.user.id)
-    .then(({ settings}) => {
-      res.render('edit-setting', Settings);
+    .then(({ settings} ) => {
+      res.render('edit-settings', settings);
     })
     .catch(err => res.status(404));
 }
