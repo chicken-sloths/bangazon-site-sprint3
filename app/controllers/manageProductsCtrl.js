@@ -75,7 +75,8 @@ module.exports.addNewProductForSale = (req, res, next) => {
     .then(newRecord => {
       res.redirect(`/products/details/${newRecord.id}`);
     })
-    .catch(err => {
+    .catch( (err) => {
+      console.log(err);
       next(err);
     })
 };

@@ -1,11 +1,11 @@
 extends layout
 
 block content
-  h1 This is a form
+  h1 Login
   if message
     h2= message
 
   form(action="/login", method="post")
     input(type="email" placeholder="email" name="email")
     input(type="password" placeholder="password" name="password")
-    button(type="submit") login
+    button(type="submit") Login

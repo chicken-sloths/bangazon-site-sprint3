@@ -37,8 +37,8 @@ router.use(require('./authRoute'));
 router.use(checkAuth);
 
 router.use('/cart', require('./cartRouter'));
-router.get('/settings', displayUsersSettings);
 router.use('/orders', getOrderHistory);
+router.use('/settings', require('./settingsRouter'));
 router.use('/payment', require('./paymentsRouter'));
 
 // Default route
