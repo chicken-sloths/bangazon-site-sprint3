@@ -33,6 +33,6 @@ module.exports.editUserSettings = (req, res, next) => {
   }
   Customer.update(newData, {where: {id: req.user.id}})
   .then(updatedCustomer => {
-    console.log('user updated!');
+    module.exports.displayUsersSettings(req, res, next);
   })
 }
