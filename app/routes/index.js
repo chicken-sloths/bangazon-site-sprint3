@@ -9,7 +9,10 @@ const {
   displayAllCategories
 } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
-const { displayUsersSettings } = require('../controllers/settingsCtrl');
+const {
+  displayUsersSettings,
+  getOrderHistory
+} = require('../controllers/settingsCtrl');
 
 // middleware to populate categories in nav bar
 router.use((req, res, next) => {
@@ -35,6 +38,7 @@ router.use(checkAuth);
 
 router.use('/cart', require('./cartRouter'));
 router.get('/settings', displayUsersSettings);
+router.use('/orders', getOrderHistory);
 router.use('/payment', require('./paymentsRouter'));
 
 // Default route
