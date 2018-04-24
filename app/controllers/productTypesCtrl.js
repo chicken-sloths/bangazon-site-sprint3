@@ -35,6 +35,7 @@ const getProductsByType = id => {
         products.forEach((p, index) => {
           p.quantity_left = qtys[index];
         });
+        products = products.filter(p => p.quantity_left > 0);
         resolve({ products, prodType });
       })
       .catch(err => reject(err));
