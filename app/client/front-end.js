@@ -36,3 +36,19 @@ $('.deleteFromCart').on('click', (event) => {
     }
   });
 });
+
+$('#cancelOrderBtn').on('click', (event) => {
+  console.log("click");
+  // let productOrderId = event.target.dataset.orderId;
+  // $.ajax({
+  //   url: `/cart/${productOrderId}`,
+  //   type: 'DELETE',
+  //   success: result => {
+  //       $(`.product[data-order-id=${productOrderId}]`).remove();
+  //       $('.row:empty')
+  //         .html('<h2>Add some items to your cart</h2>')
+  //         .next().attr('href', '/')
+  //         .children().text('Product Categories');
+  //   }
+  // });
+});

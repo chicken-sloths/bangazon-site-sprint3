@@ -9,6 +9,8 @@ module.exports.displayCart = (req, res, next) => {
     }
   })
     .then(activeOrder => {
+      console.log("active order xxxxx", activeOrder);
+      
       if (activeOrder === null) return res.render('cart', { message: "Add some items to your cart" });
       return ProductOrder.findAll({
         where: {
@@ -29,6 +31,7 @@ module.exports.displayCart = (req, res, next) => {
           current_price: po.price
         };
       });
+      console.log("zzzz prods", products);
       res.render('cart.pug', { products, state: 'cart' });
     });
 };
