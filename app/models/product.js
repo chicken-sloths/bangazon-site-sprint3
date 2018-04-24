@@ -34,8 +34,8 @@ module.exports = (sequelize, DataTypes) => {
       notEmpty: true
       }
     },
-    product_type_id: DataTypes.TINYINT,
-    creator_id: DataTypes.TINYINT
+    product_type_id: DataTypes.INTEGER,
+    creator_id: DataTypes.INTEGER
   }, {});
   Product.associate = function (models) {
     Product.belongsTo(models.Customer, {
