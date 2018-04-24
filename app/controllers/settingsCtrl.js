@@ -1,5 +1,8 @@
 'use strict';
 
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
+
 module.exports.displayUsersSettings = (req, res, next) => {
   const { Customer, PaymentOption } = req.app.get('models');
 
@@ -17,7 +20,10 @@ module.exports.getOrderHistory = (req, res, next) => {
     .then(user => {
       return Order.findAll({
         where: {
-          customer_id: req.user.id
+          customer_id: req.user.id,
+          payment_option_id: {
+            [Op.ne]: null
+          }
         },
         raw: true
       });
@@ -29,9 +35,11 @@ module.exports.getOrderHistory = (req, res, next) => {
           where: {
             order_id: o.id
           },
-          include: [{
-            model: Product
-          }],
+          required: true,
+          include: [
+            { model: Product },
+            { model: Order }
+          ],
           order: [
             ['id', 'DESC']
           ],
@@ -63,7 +71,7 @@ module.exports.getOrderHistory = (req, res, next) => {
 module.exports.renderEditForm = (req, res, next) => {
   const { Customer } = req.app.get('models');
   Customer.findById(req.user.id)
-    .then(({ dataValues } ) => {
+    .then(({ dataValues }) => {
       res.render('edit-settings', dataValues);
     })
     .catch(err => res.status(404));
@@ -81,12 +89,12 @@ module.exports.editUserSettings = (req, res, next) => {
     postal_code: req.body.postal_code,
     phone_number: req.body.phone_number,
   }
-  Customer.update(newData, {where: {id: req.user.id}})
-  .then(updatedCustomer => {
-    module.exports.displayUsersSettings(req, res, next);
-  })
-  .catch(err => {
-    console.log(err);
-    module.exports.renderEditForm(req, res, next);
-  })
+  Customer.update(newData, { where: { id: req.user.id } })
+    .then(updatedCustomer => {
+      module.exports.displayUsersSettings(req, res, next);
+    })
+    .catch(err => {
+      console.log(err);
+      module.exports.renderEditForm(req, res, next);
+    })
 }
