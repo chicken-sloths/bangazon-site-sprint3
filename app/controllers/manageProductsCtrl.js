@@ -76,7 +76,7 @@ module.exports.addNewProductForSale = (req, res, next) => {
       res.redirect(`/products/details/${newRecord.id}`);
     })
     .catch( (err) => {
-      console.log("THIS IS WHAT I GET WOW", err, "FUCK");
+      console.log(err);
       next(err);
     })
 };

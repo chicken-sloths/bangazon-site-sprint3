@@ -3,8 +3,8 @@ block content
   h1 Add a New Product
   form(action="/products/manage/new" method="POST")
     input(type="text" name="title" placeholder="Product Name")
-    input(type="text" name="current_price" placeholder="Price")
-    input(type="text" name="quantity" placeholder="How many are there available to sell?")
+    input(type="number" step="00.01" min="0" name="current_price" placeholder="Price")
+    input(type="number" min="1" name="quantity" placeholder="How many are there available to sell?")
     input(type="text" name="description" placeholder="Description")
     select(name="product_type_id")
       each type in productTypes
