@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   var PaymentOption = sequelize.define('PaymentOption', {
     type: DataTypes.STRING,
     deleted: DataTypes.BOOLEAN,
-    account_number: DataTypes.INTEGER,
+    account_number: DataTypes.STRING,
     customer_id: DataTypes.INTEGER
   }, {});
   PaymentOption.associate = function(models) {

@@ -1,5 +1,6 @@
 extends layout
 
 block content
+  h1= prodType.title
   for product in products
     include partials/product-card
