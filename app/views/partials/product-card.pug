@@ -3,7 +3,7 @@ if product.quantity_left == null || product.quantity_left > 0 || state === "mana
     h3.card-title
       a(href='/products/details/' + product.id)= product.title
     h4 $#{product.current_price}
-    if product.quantity_left
+    if state === "manage"
       h4 In stock: #{product.quantity_left}
       h4 Sold: #{product.quantity - product.quantity_left}
     .card-description #{product.description}
