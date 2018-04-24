@@ -3,7 +3,7 @@
 const { Router } = require('express');
 const router = Router();
 const checkAuth = require('./checkAuth')
-// const
+
 const {
   displayRegister,
   register,

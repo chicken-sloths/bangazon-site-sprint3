@@ -10,7 +10,7 @@ block content
         b= quantity
       p $#{current_price} / each
       if quantity > 0
-        form(name='add_to_cart' method='POST' action=`/products/${id}`)
+        form(name='add_to_cart' method='POST' action=`/cart/${id}`)
           button.btn.btn-success(name='add_to_cart' type='submit') Add to Cart
       else
         button.btn.btn-secondary(disabled) Add to Cart
