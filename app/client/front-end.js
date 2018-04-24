@@ -1,17 +1,17 @@
 'use strict';
 
-$(".deleteProdBtn").on('click', (event) => {
+$('.deleteProdBtn').on('click', (event) => {
   let productId = event.target.dataset.id;
   $.ajax({
-    url: `/products/manage/remove/${productId}`,
-    type: 'PATCH',
+    url: `/products/manage/${productId}`,
+    type: 'DELETE',
     success: result => {
         $(`.product[data-id=${productId}]`).remove();
     }
   });
 });
 
-$(".deletePayOpBtn").on('click', (event) => {
+$('.deletePayOpBtn').on('click', (event) => {
   let payOpId = event.target.dataset.id;
   $.ajax({
     url: `/payment/${payOpId}`,
@@ -22,7 +22,7 @@ $(".deletePayOpBtn").on('click', (event) => {
   });
 });
 
-$(".deleteFromCart").on('click', (event) => {
+$('.deleteFromCart').on('click', (event) => {
   let productOrderId = event.target.dataset.orderId;
   $.ajax({
     url: `/cart/${productOrderId}`,
