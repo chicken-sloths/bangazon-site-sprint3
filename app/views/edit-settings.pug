@@ -1,0 +1,11 @@
+extends layout
+block content
+  h1 Add a New Product
+  form(action="/settings/edit" method="POST")
+    input(type="text" name="first_name" placeholder="#{Settings.first_name}")
+    input(type="text" name="last_name" placeholder="#{Settings.last_name}")
+    input(type="text" name="street_address" placeholder="#{Settings.street_address || Street Address}")
+    input(type="text" name="city" placeholder="#{Settings.city || City}")
+    input(type="text" name="phone_number" placeholder="#{Settings.phone_number || Phone}")
+
+    button(type="submit" text="Submit") Submit
