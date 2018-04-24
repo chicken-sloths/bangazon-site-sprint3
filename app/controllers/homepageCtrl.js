@@ -75,7 +75,7 @@ const getLatestProducts = () => {
     Product.findAll({
       limit: 8
     },{
-        order: sequelize.literal('max(age) DESC')
+        order: sequelize.literal('max(createdAt) DESC')
     })
     .then(products => {
       console.log('products!');
