@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  for order in orderHistory
+    h1= order.id
+    ul
+      for product in order.products
+        li= product['Product.title']
