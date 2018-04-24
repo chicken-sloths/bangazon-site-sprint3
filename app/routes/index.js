@@ -4,7 +4,7 @@ const { Router } = require('express');
 const router = Router();
 const { displayCategory, displayAllCategories } = require('../controllers/productTypesCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
-const { displayUsersSettings, editUserSettings } = require('../controllers/settingsCtrl');
+
 const checkAuth = require('./checkAuth');
 
 router.use((req, res, next) => {
@@ -29,8 +29,7 @@ router.use(require('./authRoute'));
 router.use(checkAuth);
 
 router.use('/cart', require('./cartRouter'));
-router.get('/settings', displayUsersSettings);
-router.post('/settings', editUserSettings);
+router.use('/settings', require('./settingsRouter'));
 router.use('/payment', require('./paymentsRouter'));
 
 // Default route
