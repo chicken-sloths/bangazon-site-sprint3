@@ -13,8 +13,8 @@ module.exports.displayUsersSettings = (req, res, next) => {
 module.exports.renderEditForm = (req, res, next) => {
   const { Customer } = req.app.get('models');
   Customer.findById(req.user.id)
-    .then(({ settings} ) => {
-      res.render('edit-settings', settings);
+    .then(({ dataValues } ) => {
+      res.render('edit-settings', dataValues);
     })
     .catch(err => res.status(404));
 }
@@ -31,6 +31,6 @@ module.exports.editUserSettings = (req, res, next) => {
   }
   Customer.update(newData, {where: {customer_id: req.user.id}})
   .then(updatedCustomer => {
-    module.exports.displayUsersSettings(req, res, next);
+    console.log('user updated!');
   })
 }

@@ -2,11 +2,11 @@ extends layout
 block content
   h1 Update Your Information
   form(action="/settings/edit" method="POST")
-    input(type="text" name="first_name" placeholder="#{Settings.first_name}")
-    input(type="text" name="last_name" placeholder="#{Settings.last_name}")
-    input(type="text" name="street_address" placeholder="#{Settings.street_address || Street Address}")
-    input(type="text" name="city" placeholder="#{Settings.city || City}")
-    input(type="text" name="postal_code" placeholder="#{Settings.postal_code || Postal Code}")
-    input(type="text" name="phone_number" placeholder="#{Settings.phone_number || Phone}")
+    input(type="text" name="first_name" value=first_name)
+    input(type="text" name="last_name" value=last_name)
+    input(type="text" name="street_address" value=street_address)
+    input(type="text" name="city" value=city)
+    input(type="text" name="postal_code" value=postal_code)
+    input(type="text" name="phone_number" value=phone_number)
 
     button(type="submit" text="Submit") Submit
