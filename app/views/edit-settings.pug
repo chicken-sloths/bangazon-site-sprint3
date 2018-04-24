@@ -1,0 +1,13 @@
+extends layout
+block content
+  h1 Update Your Information
+  form(action="/settings/edit" method="POST")
+    input(type="text" name="first_name" value=first_name required)
+    input(type="text" name="last_name" value=last_name required)
+    input(type="text" name="street_address" value=street_address placeholder="Street Address" required)
+    input(type="text" name="city" value=city placeholder="City" required)
+    input(type="text" name="state" value=state placeholder="State" required)
+    input(type="text" name="postal_code" maxlength="5" value=postal_code placeholder="Postal Code" required)
+    input(type="tel" name="phone_number" value=phone_number placeholder="Phone Number" required)
+
+    button(type="submit" text="Submit") Submit
