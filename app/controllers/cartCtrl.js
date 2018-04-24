@@ -9,7 +9,7 @@ module.exports.displayCart = (req, res, next) => {
     }
   })
     .then(activeOrder => {
-      if (activeOrder === null) return res.render('cart', { message: "Add some items to your cart" })
+      if (activeOrder === null) return res.render('cart', { message: "Add some items to your cart" });
       return ProductOrder.findAll({
         where: {
           order_id: activeOrder.id
@@ -19,6 +19,7 @@ module.exports.displayCart = (req, res, next) => {
       })
     })
     .then(productOrders => {
+      if (productOrders.length === 0) return res.render('cart', { message: "Add some items to your cart" });
       let products = productOrders.map(po => {
         return {
           id: po['Product.id'],
