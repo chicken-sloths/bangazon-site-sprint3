@@ -7,12 +7,10 @@ const {
   displayCart,
   addToCart,
   removeProductFromCart,
-  cancelOrder
-} = require('../controllers/cartCtrl');
-const {
+  cancelOrder,
   displayCheckoutForm,
   closeOrder
-} = require('../controllers/completeOrderCtrl');
+} = require('../controllers/ordersCtrl');
 
 // all routes require authentication
 cartRouter.use(checkAuth);

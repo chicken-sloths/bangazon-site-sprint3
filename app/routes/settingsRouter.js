@@ -1,7 +1,12 @@
 'use strict';
 const { Router } = require('express');
 const settingsRouter = Router();
-const { displayUsersSettings, editUserSettings, renderEditForm } = require('../controllers/settingsCtrl');
+
+const {
+  displayUsersSettings,
+  editUserSettings,
+  renderEditForm
+} = require('../controllers/usersCtrl');
 
 // displays the user's settings
 settingsRouter.get('/', displayUsersSettings);

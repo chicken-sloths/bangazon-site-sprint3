@@ -7,25 +7,20 @@ const checkAuth = require('./checkAuth');
 const {
   displayRecommendations,
   deleteRecommendation
- } = require('../controllers/recommendationCtrl');
+ } = require('../controllers/recommendationsCtrl');
 
 const {
   displayHomePage,
   displayCategory
-} = require('../controllers/homepageCtrl');
+} = require('../controllers/productTypesCtrl');
 
-const { searchProductsByName } = require('../controllers/searchCtrl');
-
-const {
-  displayUsersSettings,
-  getOrderHistory
-} = require('../controllers/settingsCtrl');
+const { searchProductsByName } = require('../controllers/productsCtrl');
+const { displayUsersSettings } = require('../controllers/usersCtrl');
+const { getOrderHistory } = require('../controllers/ordersCtrl');
 
 // middleware to populate categories in nav bar
 router.use((req, res, next) => {
   const { ProductType } = req.app.get('models');
-  res.locals.numOfRecommendations = 0;
-
   ProductType.findAll()
     .then(prodTypes => {
       res.locals.categories = prodTypes;

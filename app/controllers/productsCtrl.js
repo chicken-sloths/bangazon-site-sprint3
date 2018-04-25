@@ -1,5 +1,8 @@
 'use strict';
 
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
+
 // displays authenticated products
 module.exports.displayUsersProducts = (req, res, next) => {
   let products;

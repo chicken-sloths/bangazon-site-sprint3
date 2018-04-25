@@ -8,13 +8,11 @@ const {
   addNewProductForSale,
   renderAddProductForm,
   displayUsersProducts,
-  removeProductFromSale
-} = require('../controllers/manageProductsCtrl');
+  removeProductFromSale,
+  displayProductDetail
+} = require('../controllers/productsCtrl');
 
-const {
-  displayProductDetail,
-  addRecommendationToCustomer
-} = require('../controllers/productDetailCtrl');
+const { addRecommendationToCustomer } = require('../controllers/recommendationsCtrl');
 
 productsRouter.get('/details/:id', displayProductDetail);
 

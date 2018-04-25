@@ -9,7 +9,7 @@ const {
   removePaymentOption,
   displayAddNewPaymentOption,
   addNewPaymentOption
-} = require('../controllers/managePaymentsCtrl');
+} = require('../controllers/paymentsCtrl');
 
 // all routes require authentication
 paymentsRouter.use(checkAuth);

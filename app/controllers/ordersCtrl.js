@@ -1,5 +1,8 @@
 'use strict';
 
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
+
 // grabs the user's payment options and passes them into appropriate pug template
 module.exports.displayCheckoutForm = (req, res, next) => {
   const { PaymentOption } = req.app.get('models');
