@@ -38,8 +38,8 @@ $('.deleteFromCart').on('click', (event) => {
 });
 
 $('#cancelOrderBtn').on('click', (event) => {
-  console.log("click");
-  // let productOrderId = event.target.dataset.orderId;
+  console.log(event.target.dataset.id);
+  let activeOrderId = event.target.dataset.id;
   // $.ajax({
   //   url: `/cart/${productOrderId}`,
   //   type: 'DELETE',

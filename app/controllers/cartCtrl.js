@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports.displayCart = (req, res, next) => {
+  let currentOrderId;
   const { Product, Order, ProductOrder } = req.app.get('models');
   Order.find({
     where: {
@@ -9,8 +10,9 @@ module.exports.displayCart = (req, res, next) => {
     }
   })
     .then(activeOrder => {
-      console.log("active order xxxxx", activeOrder);
-
+      // console.log("active order xxxxx", activeOrder);
+      currentOrderId = activeOrder.id;
+      console.log("xxx", currentOrderId);
       if (activeOrder === null) return res.render('cart', { message: "Add some items to your cart" });
       return ProductOrder.findAll({
         where: {
@@ -33,7 +35,7 @@ module.exports.displayCart = (req, res, next) => {
         };
       });
       console.log("zzzz prods", products);
-      res.render('cart.pug', { order_id, products, state: 'cart' });
+      res.render('cart.pug', { currentOrderId, products, state: 'cart' });
     });
 };
 
