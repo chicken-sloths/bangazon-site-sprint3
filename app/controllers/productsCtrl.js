@@ -34,9 +34,7 @@ module.exports.displayUsersProducts = (req, res, next) => {
 // result of client-side JS btn click, Patches attribute on product object from deleted: false to deleted: true and sends user back to manage product page
 module.exports.removeProductFromSale = (req, res, next) => {
   const { Product } = req.app.get('models');
-  Product.find({
-    where: { id: req.params.id }
-  })
+  Product.findById(req.params.id)
     .then(productToUpdate => {
       return productToUpdate.updateAttributes({ deleted: true })
     })

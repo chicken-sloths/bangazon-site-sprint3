@@ -52,9 +52,7 @@ module.exports.displayCart = (req, res, next) => {
       if (activeOrder === null) return res.render('cart', { message: "Add some items to your cart" });
       currentOrderId = activeOrder.id;
       return ProductOrder.findAll({
-        where: {
-          order_id: activeOrder.id
-        },
+        where: { order_id: activeOrder.id },
         include: [{ model: Product }],
         raw: true
       })

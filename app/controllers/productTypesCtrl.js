@@ -18,7 +18,7 @@ const {
 const getProductsByType = id => {
   return new Promise((resolve, reject) => {
     let products, prodType;
-    ProductType.findOne({ where: { id } })
+    ProductType.findById(id)
       .then(type => {
         prodType = type;
         return Product.findAll({
