@@ -12,7 +12,8 @@ const {
 } = require('../controllers/manageProductsCtrl');
 
 const {
-  displayProductDetail
+  displayProductDetail,
+  addRecommendationToCustomer
 } = require('../controllers/productDetailCtrl');
 
 productsRouter.get('/details/:id', displayProductDetail);
@@ -20,6 +21,7 @@ productsRouter.get('/details/:id', displayProductDetail);
 // all routes require authentication
 productsRouter.use(checkAuth);
 
+productsRouter.post('/details/:id', addRecommendationToCustomer);
 // renders view to show current user's products
 productsRouter.get(('/manage'), displayUsersProducts);
 productsRouter.delete(('/manage/:id'), removeProductFromSale);
