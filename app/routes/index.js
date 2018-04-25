@@ -5,15 +5,17 @@ const router = Router();
 const checkAuth = require('./checkAuth');
 
 const {
-  displayCategory,
-  displayAllCategories
-} = require('../controllers/productTypesCtrl');
-const {
   displayRecommendations,
   deleteRecommendation
  } = require('../controllers/recommendationCtrl');
-const { displayHomePage , displayCategory } = require('../controllers/homepageCtrl');
+
+const {
+  displayHomePage,
+  displayCategory
+} = require('../controllers/homepageCtrl');
+
 const { searchProductsByName } = require('../controllers/searchCtrl');
+
 const {
   displayUsersSettings,
   getOrderHistory
