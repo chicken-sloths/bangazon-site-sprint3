@@ -6,4 +6,8 @@ block content
     h2= messages.registerMsg
   else if messages.welcomeBackMsg
     h2 #{messages.welcomeBackMsg} #{session.passport.user.first_name}
+  h3 New Products
+  for product in products
+    include partials/product-card
+    
   include partials/allProductTypes

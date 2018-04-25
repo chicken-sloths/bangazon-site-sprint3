@@ -5,10 +5,17 @@ const router = Router();
 const checkAuth = require('./checkAuth');
 
 const {
-  displayCategory,
-  displayAllCategories
-} = require('../controllers/productTypesCtrl');
+  displayRecommendations,
+  deleteRecommendation
+ } = require('../controllers/recommendationCtrl');
+
+const {
+  displayHomePage,
+  displayCategory
+} = require('../controllers/homepageCtrl');
+
 const { searchProductsByName } = require('../controllers/searchCtrl');
+
 const {
   displayUsersSettings,
   getOrderHistory
@@ -17,15 +24,27 @@ const {
 // middleware to populate categories in nav bar
 router.use((req, res, next) => {
   const { ProductType } = req.app.get('models');
+  res.locals.numOfRecommendations = 0;
+
   ProductType.findAll()
     .then(prodTypes => {
       res.locals.categories = prodTypes;
+      if (req.user) {
+        const { Customer } = req.app.get('models');
+        Customer.findById(req.user.id)
+          .then(customer => {
+            return customer.countRecommendations();
+          })
+          .then(num => {
+            res.locals.numOfRecommendations = num || 0;
+          });
+      }
       next();
     });
 });
 
 // no auth required
-router.get('/', displayAllCategories);
+router.get('/', displayHomePage);
 router.get('/categories/:id', displayCategory);
 router.post('/search', searchProductsByName);
 router.use('/products', require('./productsRouter'));
@@ -35,7 +54,8 @@ router.use(require('./authRoute'));
 
 // auth required below this point
 router.use(checkAuth);
-
+router.get('/recommendations', displayRecommendations);
+router.delete('/recommendations/delete/:id', deleteRecommendation);
 router.use('/cart', require('./cartRouter'));
 router.use('/orders', getOrderHistory);
 router.use('/settings', require('./settingsRouter'));

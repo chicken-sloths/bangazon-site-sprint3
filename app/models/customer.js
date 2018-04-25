@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Customer = sequelize.define('Customer', {
-    first_name: { 
+    first_name: {
       type: DataTypes.STRING,
       validate: {
         isAlpha: true,
@@ -69,6 +69,10 @@ module.exports = (sequelize, DataTypes) => {
     });
     Customer.hasMany(models.Order, {
       foreignKey: 'customer_id'
+    });
+    Customer.belongsToMany(models.Product, {
+      as: "Recommendations",
+      through: "customer_recommendation"
     });
   };
   return Customer;

@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 Recommendations
+    .row
+      if !products.length
+        h2 No recommendations, sorry!
+      for product in products
+        include partials/product-card
