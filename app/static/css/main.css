@@ -1,0 +1,17 @@
+.fade-out {
+  opacity: 1;
+  color: darkgray;
+	animation-name: fadeOut;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-out;
+	animation-duration: 1s;
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	} 
+} 
