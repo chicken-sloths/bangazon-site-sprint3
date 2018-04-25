@@ -3,7 +3,7 @@
 $('.deleteRecommendation').on('click', event => {
   let productId = event.target.dataset.id;
   $.ajax({
-    url: `/recommendations/delete/${productId}`,
+    url: `/recommendations/${productId}`,
     type: 'DELETE',
     success: result => {
       const num = $('#numOfRecommendations').text()

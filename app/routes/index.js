@@ -5,11 +5,6 @@ const router = Router();
 const checkAuth = require('./checkAuth');
 
 const {
-  displayRecommendations,
-  deleteRecommendation
- } = require('../controllers/recommendationsCtrl');
-
-const {
   displayHomePage,
   displayCategory
 } = require('../controllers/productTypesCtrl');
@@ -49,8 +44,7 @@ router.use(require('./authRoute'));
 
 // auth required below this point
 router.use(checkAuth);
-router.get('/recommendations', displayRecommendations);
-router.delete('/recommendations/delete/:id', deleteRecommendation);
+router.use('/recommendations', require('./recommendationsRouter'));
 router.use('/cart', require('./cartRouter'));
 router.use('/orders', getOrderHistory);
 router.use('/settings', require('./settingsRouter'));

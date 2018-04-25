@@ -8,13 +8,8 @@ const {
   renderEditForm
 } = require('../controllers/usersCtrl');
 
-// displays the user's settings
 settingsRouter.get('/', displayUsersSettings);
-
-// displays the form to edit the user's settings
 settingsRouter.get('/edit', renderEditForm);
-
-// patches new settings to the database
 settingsRouter.post('/edit', editUserSettings);
 
 module.exports = settingsRouter;
