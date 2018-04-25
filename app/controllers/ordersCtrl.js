@@ -85,8 +85,7 @@ module.exports.cancelOrder = (req, res, next) => {
 module.exports.removeProductFromCart = (req, res, next) => {
   const { ProductOrder, Order, Customer } = req.app.get('models');
   // this findOne block makes sure that the auth'd user actually owns the productOrder they're tryna delete
-  ProductOrder.findOne({
-    where: { id: req.params.id },
+  ProductOrder.findById(req.params.id, {
     include: [{
       model: Order,
       where: {

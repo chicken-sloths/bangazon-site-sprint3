@@ -36,11 +36,8 @@ module.exports.addNewPaymentOption = (req, res, next) => {
 
 module.exports.removePaymentOption = (req, res, next) => {
   const { PaymentOption } = req.app.get('models');
-  PaymentOption.find({
-    where: {
-      id: req.params.id,
-      customer_id: req.user.id
-    }
+  PaymentOption.findById(req.params.id, {
+    where: { customer_id: req.user.id }
   })
     .then(paymentToUpdate => {
       return paymentToUpdate.updateAttributes({ deleted: true });

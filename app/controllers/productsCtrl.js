@@ -87,8 +87,7 @@ module.exports.addNewProductForSale = (req, res, next) => {
 
 module.exports.displayProductDetail = (req, res, next) => {
   const { Product, ProductOrder } = req.app.get('models');
-  Product.find({
-    where: { id: req.params.id },
+  Product.findById(req.params.id, {
     include: [{ model: ProductOrder, group: 'product_id' }]
   })
     .then(({ dataValues }) => {

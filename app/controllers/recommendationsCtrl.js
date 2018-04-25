@@ -5,7 +5,7 @@ module.exports.displayRecommendations = (req, res, next) => {
 
   Customer.findById(req.user.id)
     .then(customer => {
-      return customer.getRecommendations()
+      return customer.getRecommendations();
     })
     .then(recommendations => {
       res.render('recommendations', { products: recommendations, state: "recommendations" });
@@ -36,9 +36,7 @@ module.exports.addRecommendationToCustomer = (req, res, next) => {
   }
 
   const { Product, Customer } = req.app.get('models');
-  Customer.find({
-    where: { email }
-  })
+  Customer.find({ where: { email } })
     .then(customer => {
       if (customer === null) {
         res.redirect(`/products/details/${productId}?email=${email.replace('@', '%40')}`);

@@ -5,7 +5,6 @@ const Op = sequelize.Op;
 
 module.exports.displayUsersSettings = (req, res, next) => {
   const { Customer, PaymentOption } = req.app.get('models');
-
   Customer.findById(req.user.id)
     .then(({ dataValues }) => {
       res.render('settings', dataValues);
@@ -21,7 +20,6 @@ module.exports.renderEditForm = (req, res, next) => {
     })
     .catch(err => res.status(404));
 }
-
 
 module.exports.editUserSettings = (req, res, next) => {
   const { Customer } = req.app.get('models');
@@ -39,7 +37,6 @@ module.exports.editUserSettings = (req, res, next) => {
       module.exports.displayUsersSettings(req, res, next);
     })
     .catch(err => {
-      console.log(err);
       module.exports.renderEditForm(req, res, next);
     })
 }
