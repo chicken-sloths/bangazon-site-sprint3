@@ -38,19 +38,12 @@ $('.deleteFromCart').on('click', (event) => {
 });
 
 $('#cancelOrderBtn').on('click', (event) => {
-  // console.log(event.target.dataset.id);
   let activeOrderId = event.target.dataset.id;
   $.ajax({
     url: `/cart/cancel/${activeOrderId}`,
     type: 'DELETE',
-    return: false,
     success: result => {
-      console.log(done);
-        // $(`.product[data-order-id=${productOrderId}]`).remove();
-        // $('.row:empty')
-        //   .html('<h2>Add some items to your cart</h2>')
-        //   .next().attr('href', '/')
-        //   .children().text('Product Categories');
+      window.location = '/cart';
     }
   });
 });

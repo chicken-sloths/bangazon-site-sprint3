@@ -10,8 +10,8 @@ module.exports.displayCart = (req, res, next) => {
     }
   })
     .then(activeOrder => {
-      currentOrderId = activeOrder.id;
       if (activeOrder === null) return res.render('cart', { message: "Add some items to your cart" });
+      currentOrderId = activeOrder.id;
       return ProductOrder.findAll({
         where: {
           order_id: activeOrder.id
@@ -43,8 +43,9 @@ module.exports.cancelOrder = (req, res, next) => {
       id: req.params.id
     }
   })
-  .then( result => {
-    console.log(result);
+  .then( () => {
+    res.status(200).json({success: 1});
+    // res.render('cart', { message: "Add some items to your cart" });
   })
   
 };
