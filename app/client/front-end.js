@@ -1,5 +1,19 @@
 'use strict';
 
+$('.deleteRecommendation').on('click', event => {
+  let productId = event.target.dataset.id;
+  $.ajax({
+    url: `/recommendations/delete/${productId}`,
+    type: 'DELETE',
+    success: result => {
+      const num = $('#numOfRecommendations').text()
+      $('#numOfRecommendations').text(`${num - 1}`);
+      $(`.product[data-id=${productId}]`).remove();
+      $('.row:empty').html('<h2>No recommendations, sorry!</h2>');
+    }
+  });
+});
+
 $('.deleteProdBtn').on('click', (event) => {
   let productId = event.target.dataset.id;
   $.ajax({
