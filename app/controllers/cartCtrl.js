@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports.displayCart = (req, res, next) => {
+  let currentOrderId;
   const { Product, Order, ProductOrder } = req.app.get('models');
   Order.find({
     where: {
@@ -10,6 +11,7 @@ module.exports.displayCart = (req, res, next) => {
   })
     .then(activeOrder => {
       if (activeOrder === null) return res.render('cart', { message: "Add some items to your cart" });
+      currentOrderId = activeOrder.id;
       return ProductOrder.findAll({
         where: {
           order_id: activeOrder.id
@@ -23,14 +25,29 @@ module.exports.displayCart = (req, res, next) => {
       let products = productOrders.map(po => {
         return {
           id: po['Product.id'],
-          orderId: po.id,
+          orderId: po.order_id,
           title: po['Product.title'],
           description: po['Product.description'],
           current_price: po.price
         };
       });
-      res.render('cart.pug', { products, state: 'cart' });
+      res.render('cart.pug', { currentOrderId, products, state: 'cart' });
     });
+};
+
+//when canceling order, order is removed as well as all ProductOrders relationship due to delete cascade
+module.exports.cancelOrder = (req, res, next) => {
+  const { Order } = req.app.get('models');
+  Order.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then( () => {
+    res.status(200).json({success: 1});
+    // res.render('cart', { message: "Add some items to your cart" });
+  })
+  
 };
 
 module.exports.removeProductFromCart = (req, res, next) => {

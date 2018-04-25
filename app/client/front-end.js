@@ -51,6 +51,17 @@ $('.deleteFromCart').on('click', (event) => {
   });
 });
 
+$('#cancelOrderBtn').on('click', (event) => {
+  let activeOrderId = event.target.dataset.id;
+  $.ajax({
+    url: `/cart/cancel/${activeOrderId}`,
+    type: 'DELETE',
+    success: result => {
+      window.location = '/cart';
+    }
+  });
+});
+
 $("#recommendBtn").on('click', event => {
   $("#recommendInput").toggleClass('d-none');
 });

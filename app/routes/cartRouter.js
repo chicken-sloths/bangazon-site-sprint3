@@ -6,7 +6,8 @@ const checkAuth = require('./checkAuth');
 const {
   displayCart,
   addToCart,
-  removeProductFromCart
+  removeProductFromCart,
+  cancelOrder
 } = require('../controllers/cartCtrl');
 const {
   displayCheckoutForm,
@@ -18,6 +19,7 @@ cartRouter.use(checkAuth);
 cartRouter.get('/', displayCart);
 cartRouter.get('/checkout', displayCheckoutForm);
 cartRouter.post('/checkout', closeOrder);
+cartRouter.delete('/cancel/:id', cancelOrder);
 cartRouter.post('/:id', addToCart);
 cartRouter.delete('/:id', removeProductFromCart);
 
