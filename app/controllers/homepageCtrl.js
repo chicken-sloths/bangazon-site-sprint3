@@ -72,14 +72,8 @@ const displayAllCategories = () => {
 // Gets most recent products
 const getLatestProducts = () => {
   return new Promise ((resolve, reject) => {
-    Product.findAll({
-      limit: 8
-    },{
-        order: sequelize.literal('max(createdAt) DESC')
-    })
+    Product.findAll({ limit: 5, order: [['updatedAt', 'DESC']] })
     .then(products => {
-      console.log('products!');
-      console.log(products);
       resolve(products);
     })
     .catch(err => {
