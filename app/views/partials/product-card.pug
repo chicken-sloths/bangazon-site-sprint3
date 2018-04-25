@@ -10,3 +10,5 @@ if product.quantity_left == null || product.quantity_left > 0 || state === "mana
       button.deleteProdBtn.btn.btn-danger.mx-auto(data-id=product.id) Delete
     if state === "cart"
       button.deleteFromCart.btn.btn-danger.mx-auto(data-id=product.id, data-order-id=product.orderId) Delete
+    if state === "recommendations"
+      button.deleteRecommendation.btn.btn-danger.mx-auto(data-id=product.id) Delete
