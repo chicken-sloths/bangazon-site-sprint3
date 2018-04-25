@@ -33,7 +33,7 @@ module.exports.displayCart = (req, res, next) => {
         };
       });
       console.log("zzzz prods", products);
-      res.render('cart.pug', { products, state: 'cart' });
+      res.render('cart.pug', { order_id, products, state: 'cart' });
     });
 };
 
