@@ -10,9 +10,7 @@ module.exports.displayCart = (req, res, next) => {
     }
   })
     .then(activeOrder => {
-      // console.log("active order xxxxx", activeOrder);
       currentOrderId = activeOrder.id;
-      console.log("xxx", currentOrderId);
       if (activeOrder === null) return res.render('cart', { message: "Add some items to your cart" });
       return ProductOrder.findAll({
         where: {
@@ -23,7 +21,6 @@ module.exports.displayCart = (req, res, next) => {
       })
     })
     .then(productOrders => {
-      console.log("yyyy", productOrders);
       if (productOrders.length === 0) return res.render('cart', { message: "Add some items to your cart" });
       let products = productOrders.map(po => {
         return {
@@ -34,9 +31,14 @@ module.exports.displayCart = (req, res, next) => {
           current_price: po.price
         };
       });
-      console.log("zzzz prods", products);
       res.render('cart.pug', { currentOrderId, products, state: 'cart' });
     });
+};
+
+module.exports.cancelOrder = (req, res, next) => {
+  console.log("XYZ", req.params.id);
+  const { ProductOrder, Order, Customer } = req.app.get('models');
+  
 };
 
 module.exports.removeProductFromCart = (req, res, next) => {
