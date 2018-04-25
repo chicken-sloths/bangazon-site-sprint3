@@ -14,9 +14,6 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
-      creation_date: {
-        type: Sequelize.STRING
-      },
       quantity: {
         type: Sequelize.INTEGER
       },

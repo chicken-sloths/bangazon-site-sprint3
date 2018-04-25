@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true
       }
     },
-    account_creation_date: DataTypes.STRING,
     street_address: {
       type: DataTypes.STRING,
       validate: {

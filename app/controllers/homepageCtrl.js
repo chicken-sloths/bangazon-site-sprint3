@@ -8,6 +8,10 @@ const sequelize = require('sequelize');
 const Op = sequelize.Op;
 const { ProductType, Product, ProductOrder } = require('../models');
 
+
+// INTERNAL FUNCTIONS
+
+// Promises all products of a given type
 const getProductsByType = id => {
   return new Promise((resolve, reject) => {
     let products, prodType;
@@ -42,27 +46,67 @@ const getProductsByType = id => {
   });
 };
 
-module.exports.displayAllCategories = (req, res, next) => {
-  const { ProductType } = req.app.get('models');
+
+const displayAllCategories = () => {
   let prodTypes;
-  ProductType.findAll({ raw: true })
-    .then(productTypes => {
-      prodTypes = productTypes;
-      let prodPromises = productTypes.map(pt => getProductsByType(pt.id));
-      return Promise.all(prodPromises);
-    })
-    .then(productLists => {
-      prodTypes = prodTypes.map((pt, index) => {
-        pt.products = productLists[index].products;
-        return pt;
-      });
-      res.render('index', { prodTypes });
-    });
+  return new Promise((resolve, reject) => {
+    ProductType.findAll({ raw: true })
+      .then(productTypes => {
+        prodTypes = productTypes;
+        let prodPromises = productTypes.map(pt => getProductsByType(pt.id));
+        return Promise.all(prodPromises);
+      })
+      .then(productLists => {
+        prodTypes = prodTypes.map((pt, index) => {
+          pt.products = productLists[index].products;
+          return pt;
+        });
+        resolve(prodTypes);
+      })
+      .catch(err => {
+        reject(err);
+      })
+  })
 };
 
+// Gets most recent products
+const getLatestProducts = () => {
+  return new Promise ((resolve, reject) => {
+    Product.findAll({ limit: 5, order: [['updatedAt', 'DESC']] })
+    .then(products => {
+      resolve(products);
+    })
+    .catch(err => {
+      console.log('err');
+    })
+  })
+}
+
+
+// EXPORTED FUNCTIONS 
+
+// Calls fn to grab latest products
+// Calls fn to get prods by category
+module.exports.displayHomePage = (req, res, next) => {
+  let products;
+
+  getLatestProducts()
+  .then(prods => {
+    products = prods;
+    return displayAllCategories();
+  })
+  .then(prodTypes => {
+    res.render('index', { products, prodTypes });
+  })
+  
+}
+
+// Displays all the products in a category when you select a category in the dropdown menu
 module.exports.displayCategory = (req, res, next) => {
   getProductsByType(req.params.id)
     .then(({ products, prodType }) => {
       res.render('product-type.pug', { products, prodType });
     });
 };
+
+

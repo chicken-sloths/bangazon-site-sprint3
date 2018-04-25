@@ -15,8 +15,7 @@ const _generateOrders = ({ orderAmount }, customers, paymentOptions) => {
 
     let order = {
       customer_id: randCustId,
-      payment_option_id: payOpId > 0 ? payOpId : null,
-      creation_date: faker.date.recent()
+      payment_option_id: payOpId > 0 ? payOpId : null
     };
 
     if (payOp || !hasOpenOrder(randCustId)) {

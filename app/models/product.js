@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
       notEmpty: true
       }
     },
-    creation_date: DataTypes.STRING,
     quantity: {
       type: DataTypes.INTEGER,
     validate: {

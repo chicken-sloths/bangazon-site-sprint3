@@ -10,7 +10,6 @@ const _generateCustomers = ({ customerAmount }) => {
     const customer = {
       first_name: faker.name.firstName(),
       last_name: faker.name.lastName(),
-      account_creation_date: faker.date.recent(),
       street_address: faker.address.streetAddress(),
       city: faker.address.city(),
       state: faker.address.state(),
