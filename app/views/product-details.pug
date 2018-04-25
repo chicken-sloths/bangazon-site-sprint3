@@ -21,12 +21,12 @@ block content
   //- TODO: Refactor - maybe make an animation?
   if session.passport
     if query.added
-      h3.my-3.mx-auto.text-center Added to cart!
+      h3.my-3.mx-auto.text-center.fade-out Added to cart!
     else if query.recommend
-      h3.my-3.mx-auto.text-center Recommendation sent!
+      h3.my-3.mx-auto.text-center.fade-out Recommendation sent!
     else if query.email
-      h3.my-3.mx-auto.text-center We couldn't find your friend #{query.email}, try again?
+      h3.my-3.mx-auto.text-center.fade-out We couldn't find your friend #{query.email}, try again?
     else if query.selfrecommend
-      h3.my-3.mx-auto.text-center What you doing, trying to recommend something to yourself?
+      h3.my-3.mx-auto.text-center.fade-out What you doing, trying to recommend something to yourself?
     else if query.rerecommendemail
-      h3.my-3.mx-auto.text-center You've already recommended this to #{query.rerecommendemail}
+      h3.my-3.mx-auto.text-center.fade-out You've already recommended this to #{query.rerecommendemail}
