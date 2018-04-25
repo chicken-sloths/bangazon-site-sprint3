@@ -74,14 +74,10 @@ module.exports.displayCart = (req, res, next) => {
     });
 };
 
-//when canceling order, order is removed as well as all ProductOrders relationship due to delete cascade
+// when canceling order, order is removed as well as all ProductOrders relationship due to delete cascade
 module.exports.cancelOrder = (req, res, next) => {
   const { Order } = req.app.get('models');
-  Order.destroy({
-    where: {
-      id: req.params.id
-    }
-  })
+  Order.destroy({ where: { id: req.params.id } })
     .then(response => {
       res.status(200).json({ success: 1 });
     })
@@ -90,11 +86,9 @@ module.exports.cancelOrder = (req, res, next) => {
 
 module.exports.removeProductFromCart = (req, res, next) => {
   const { ProductOrder, Order, Customer } = req.app.get('models');
-  // this find block makes sure that the auth'd user actually owns the productOrder they're tryna delete
+  // this findOne block makes sure that the auth'd user actually owns the productOrder they're tryna delete
   ProductOrder.findOne({
-    where: {
-      id: req.params.id
-    },
+    where: { id: req.params.id },
     include: [{
       model: Order,
       where: {
@@ -127,8 +121,8 @@ module.exports.addToCart = (req, res, next) => {
       payment_option_id: null
     }
   })
-    .then(([resp]) => {
-      const order_id = resp.dataValues.id;
+    .then(([response]) => {
+      const order_id = response.dataValues.id;
 
       Product.findById(product_id)
         .then(({ dataValues: { current_price } }) => {
@@ -139,7 +133,7 @@ module.exports.addToCart = (req, res, next) => {
             product_id
           });
         })
-        .then(resp => {
+        .then(response => {
           // Renders the page again b/c quantity needs to change
           // ?added=true is accessible at req.query, used in pug template for
           // success message. Not an optimal solution, but something for now
@@ -153,6 +147,7 @@ module.exports.getOrderHistory = (req, res, next) => {
   let orderHistory;
   Customer.findById(req.user.id)
     .then(user => {
+      // gets all orders that have been paid for
       return Order.findAll({
         where: {
           customer_id: req.user.id,
@@ -167,17 +162,13 @@ module.exports.getOrderHistory = (req, res, next) => {
       orderHistory = orders;
       let productPromises = orders.map(o => {
         return ProductOrder.findAll({
-          where: {
-            order_id: o.id
-          },
+          where: { order_id: o.id },
           required: true,
           include: [
             { model: Product },
             { model: Order }
           ],
-          order: [
-            ['id', 'DESC']
-          ],
+          order: [['id', 'DESC']],
           raw: true
         });
       })
@@ -188,6 +179,7 @@ module.exports.getOrderHistory = (req, res, next) => {
         o.sum = 0;
         o.updatedAt = new Date(o.updatedAt);
         o['createdAt'] = new Date(o['createdAt']);
+        // attaches products to associated order
         o.products = products[index].map(p => {
           o.sum += +p['Product.current_price'];
           return {
