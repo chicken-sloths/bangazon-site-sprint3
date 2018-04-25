@@ -13,12 +13,14 @@ const { searchProductsByName } = require('../controllers/productsCtrl');
 const { displayUsersSettings } = require('../controllers/usersCtrl');
 const { getOrderHistory } = require('../controllers/ordersCtrl');
 
-// middleware to populate categories in nav bar
+// middleware to populate categories and recommendations in nav bar
 router.use((req, res, next) => {
   const { ProductType } = req.app.get('models');
   ProductType.findAll()
     .then(prodTypes => {
+      // categories
       res.locals.categories = prodTypes;
+      // recommendations
       if (req.user) {
         const { Customer } = req.app.get('models');
         Customer.findById(req.user.id)

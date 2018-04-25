@@ -21,7 +21,7 @@ router.post('/register', register);
 router.get('/login', displayLogin);
 router.post('/login', login);
 
-// auth required here on out
+// all routes below require auth
 router.use(checkAuth);
 
 router.get('/welcome', welcome);
