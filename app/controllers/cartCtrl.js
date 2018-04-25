@@ -37,7 +37,15 @@ module.exports.displayCart = (req, res, next) => {
 
 module.exports.cancelOrder = (req, res, next) => {
   console.log("XYZ", req.params.id);
-  const { ProductOrder, Order, Customer } = req.app.get('models');
+  const { Order } = req.app.get('models');
+  Order.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then( result => {
+    console.log(result);
+  })
   
 };
 
