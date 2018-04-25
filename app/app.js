@@ -2,6 +2,7 @@
 
 const express = require('express');
 const app = express();
+const path = require('path');
 const passport = require('passport')
 var session = require('express-session');
 let bodyParser = require('body-parser');
@@ -16,6 +17,7 @@ app.set('models', require('./models')); //pulls in models/index.js by default. I
 // And when you need to require a class of the model in a controller, use this inside a middleware function rather than a direct import:
 // const { Computer } = req.app.get('models');
 
+app.use(express.static(__dirname + '/static'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
 app.locals.globalWow = "Express is, like, MAGIC"; //If we end up needing some value to be available to every pug template, look into using something like this that can be accessed in the templates just like any variable we pass directly to the template.
