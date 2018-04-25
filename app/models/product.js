@@ -47,6 +47,9 @@ module.exports = (sequelize, DataTypes) => {
     Product.hasMany(models.ProductOrder, {
       foreignKey: 'product_id'
     });
+    Product.belongsToMany(models.Customer, {
+      through: "customer_recommendation"
+    });
   };
 
   Product.prototype.getQuantityRemaining = function () {
