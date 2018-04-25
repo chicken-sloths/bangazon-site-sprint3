@@ -65,7 +65,6 @@ module.exports.addNewProductForSale = (req, res, next) => {
     Product.create({
       current_price: req.body.current_price, 
       title: req.body.title, 
-      creation_date: formattedDate,
       quantity: req.body.quantity,
       deleted: false, 
       description: req.body.description, 
