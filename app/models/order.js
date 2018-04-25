@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
     });
     Order.hasMany(models.ProductOrder, {
       onDelete: 'cascade',
-      // hooks: true,
       foreignKey: 'order_id'
     });
   };

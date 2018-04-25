@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'product_id'
     });
     ProductOrder.belongsTo(models.Order, {
-      foreignKey: 'order_id',
+      foreignKey: 'order_id'
     });
   };
   return ProductOrder;

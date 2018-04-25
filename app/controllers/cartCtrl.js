@@ -35,8 +35,8 @@ module.exports.displayCart = (req, res, next) => {
     });
 };
 
+//when canceling order, order is removed as well as all ProductOrders relationship due to delete cascade
 module.exports.cancelOrder = (req, res, next) => {
-  console.log("XYZ", req.params.id);
   const { Order } = req.app.get('models');
   Order.destroy({
     where: {
