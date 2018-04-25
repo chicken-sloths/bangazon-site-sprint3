@@ -36,3 +36,7 @@ $('.deleteFromCart').on('click', (event) => {
     }
   });
 });
+
+$("#recommendBtn").on('click', event => {
+  $("#recommendInput").toggleClass('d-none');
+});
