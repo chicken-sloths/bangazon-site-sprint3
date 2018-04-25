@@ -14,9 +14,6 @@ module.exports = {
       last_name: {
         type: Sequelize.STRING
       },
-      account_creation_date: {
-        type: Sequelize.STRING
-      },
       street_address: {
         type: Sequelize.STRING
       },

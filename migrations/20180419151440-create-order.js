@@ -14,9 +14,6 @@ module.exports = {
       payment_option_id: {
         type: Sequelize.INTEGER
       },
-      creation_date: {
-        type: Sequelize.STRING
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
