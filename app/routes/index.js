@@ -8,6 +8,7 @@ const {
   displayCategory,
   displayAllCategories
 } = require('../controllers/productTypesCtrl');
+const { displayRecommendations } = require('../controllers/recommendationCtrl');
 const { searchProductsByName } = require('../controllers/searchCtrl');
 
 // middleware to populate categories in nav bar
@@ -16,6 +17,16 @@ router.use((req, res, next) => {
   ProductType.findAll()
     .then(prodTypes => {
       res.locals.categories = prodTypes;
+      if (req.user) {
+        const { Customer } = req.app.get('models');
+        Customer.findById(req.user.id)
+        .then(customer => {
+          return customer.countRecommendations();
+        })
+        .then(num => {
+          res.locals.numOfRecommendations = num;
+        });
+      }
       next();
     });
 });
@@ -31,7 +42,7 @@ router.use(require('./authRoute'));
 
 // auth required below this point
 router.use(checkAuth);
-
+router.get('/recommendations', displayRecommendations);
 router.use('/cart', require('./cartRouter'));
 router.use('/settings', require('./settingsRouter'));
 router.use('/payment', require('./paymentsRouter'));
