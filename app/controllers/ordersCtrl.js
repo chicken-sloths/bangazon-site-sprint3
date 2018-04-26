@@ -63,6 +63,7 @@ module.exports.displayCart = (req, res, next) => {
         return {
           id: po['Product.id'],
           orderId: po.order_id,
+          prodOrderId: po.id,
           title: po['Product.title'],
           description: po['Product.description'],
           current_price: po.price
