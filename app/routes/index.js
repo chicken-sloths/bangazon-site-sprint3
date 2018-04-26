@@ -16,6 +16,7 @@ const { getOrderHistory } = require('../controllers/ordersCtrl');
 // middleware to populate categories and recommendations in nav bar
 router.use((req, res, next) => {
   const { ProductType } = req.app.get('models');
+  res.locals.numOfRecommendations = 0;
   ProductType.findAll()
     .then(prodTypes => {
       // categories
