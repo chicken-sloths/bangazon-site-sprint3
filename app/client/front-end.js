@@ -3,7 +3,7 @@
 $('.deleteRecommendation').on('click', event => {
   let productId = event.target.dataset.id;
   $.ajax({
-    url: `/recommendations/delete/${productId}`,
+    url: `/recommendations/${productId}`,
     type: 'DELETE',
     success: result => {
       const num = $('#numOfRecommendations').text()
@@ -37,12 +37,12 @@ $('.deletePayOpBtn').on('click', (event) => {
 });
 
 $('.deleteFromCart').on('click', (event) => {
-  let productOrderId = event.target.dataset.orderId;
+  let productOrderId = event.target.dataset.productOrderId;
   $.ajax({
     url: `/cart/${productOrderId}`,
     type: 'DELETE',
     success: result => {
-        $(`.product[data-order-id=${productOrderId}]`).remove();
+        $(`.product[data-product-order-id=${productOrderId}]`).remove();
         $('.row:empty')
           .html('<h2>Add some items to your cart</h2>')
           .next().attr('href', '/')

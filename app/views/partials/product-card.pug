@@ -1,5 +1,5 @@
 if product.quantity_left == null || product.quantity_left > 0 || state === "manage"
-  .col-md-6.col-lg-4.card.text-center.product(data-id=product.id, data-order-id=product.orderId)
+  .col-md-6.col-lg-4.card.text-center.product(data-id=product.id, data-order-id=product.orderId, data-product-order-id=product.prodOrderId)
     h3.card-title
       a(href='/products/details/' + product.id)= product.title
     h4 $#{product.current_price}
@@ -10,6 +10,6 @@ if product.quantity_left == null || product.quantity_left > 0 || state === "mana
     if state === "manage"
       button.deleteProdBtn.btn.btn-danger.mx-auto(data-id=product.id) Delete
     if state === "cart"
-      button.deleteFromCart.btn.btn-danger.mx-auto(data-id=product.id, data-order-id=product.orderId) Delete
+      button.deleteFromCart.btn.btn-danger.mx-auto(data-id=product.id, data-order-id=product.orderId, data-product-order-id=product.prodOrderId) Delete
     if state === "recommendations"
       button.deleteRecommendation.btn.btn-danger.mx-auto(data-id=product.id) Delete

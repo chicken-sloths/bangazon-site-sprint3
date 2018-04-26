@@ -1,21 +1,17 @@
 'use strict';
 const { Router } = require('express');
 const cartRouter = Router();
-const checkAuth = require('./checkAuth');
 
 const {
   displayCart,
   addToCart,
   removeProductFromCart,
-  cancelOrder
-} = require('../controllers/cartCtrl');
-const {
+  cancelOrder,
   displayCheckoutForm,
   closeOrder
-} = require('../controllers/completeOrderCtrl');
+} = require('../controllers/ordersCtrl');
 
-// all routes require authentication
-cartRouter.use(checkAuth);
+// all routes implicitly require authentication bc of placement in index.js
 cartRouter.get('/', displayCart);
 cartRouter.get('/checkout', displayCheckoutForm);
 cartRouter.post('/checkout', closeOrder);

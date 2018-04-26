@@ -6,8 +6,11 @@
 
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
-const { ProductType, Product, ProductOrder } = require('../models');
-
+const {
+  ProductType,
+  Product,
+  ProductOrder
+} = require('../models');
 
 // INTERNAL FUNCTIONS
 
@@ -15,7 +18,7 @@ const { ProductType, Product, ProductOrder } = require('../models');
 const getProductsByType = id => {
   return new Promise((resolve, reject) => {
     let products, prodType;
-    ProductType.findOne({ where: { id } })
+    ProductType.findById(id)
       .then(type => {
         prodType = type;
         return Product.findAll({
@@ -65,22 +68,18 @@ const displayAllCategories = () => {
       })
       .catch(err => {
         reject(err);
-      })
+      });
   })
 };
 
 // Gets most recent products
 const getLatestProducts = () => {
-  return new Promise ((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     Product.findAll({ limit: 5, order: [['updatedAt', 'DESC']] })
-    .then(products => {
-      resolve(products);
-    })
-    .catch(err => {
-      console.log('err');
-    })
-  })
-}
+      .then(products => resolve(products))
+      .catch(err => reject(err));
+  });
+};
 
 
 // EXPORTED FUNCTIONS 
@@ -91,15 +90,15 @@ module.exports.displayHomePage = (req, res, next) => {
   let products;
 
   getLatestProducts()
-  .then(prods => {
-    products = prods;
-    return displayAllCategories();
-  })
-  .then(prodTypes => {
-    res.render('index', { products, prodTypes });
-  })
-  
-}
+    .then(prods => {
+      products = prods;
+      return displayAllCategories();
+    })
+    .then(prodTypes => {
+      res.render('index', { products, prodTypes });
+    })
+    .catch(err => next(err));
+};
 
 // Displays all the products in a category when you select a category in the dropdown menu
 module.exports.displayCategory = (req, res, next) => {

@@ -2,18 +2,15 @@
 
 const { Router } = require('express');
 const paymentsRouter = Router();
-const checkAuth = require('./checkAuth');
 
 const {
   displayPaymentOptions,
   removePaymentOption,
   displayAddNewPaymentOption,
   addNewPaymentOption
-} = require('../controllers/managePaymentsCtrl');
+} = require('../controllers/paymentsCtrl');
 
-// all routes require authentication
-paymentsRouter.use(checkAuth);
-
+// all routes implicitly require authentication
 paymentsRouter.get('/manage', displayPaymentOptions);
 paymentsRouter.delete('/:id', removePaymentOption);
 paymentsRouter.get('/new', displayAddNewPaymentOption);
